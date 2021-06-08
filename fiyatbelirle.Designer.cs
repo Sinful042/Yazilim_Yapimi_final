@@ -37,17 +37,17 @@
             // 
             // fiyatb_txt
             // 
-            this.fiyatb_txt.Location = new System.Drawing.Point(188, 140);
+            this.fiyatb_txt.Location = new System.Drawing.Point(188, 144);
             this.fiyatb_txt.Name = "fiyatb_txt";
             this.fiyatb_txt.Size = new System.Drawing.Size(166, 20);
             this.fiyatb_txt.TabIndex = 0;
             // 
             // fiyatbelirle_btn
             // 
-            this.fiyatbelirle_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.fiyatbelirle_btn.Location = new System.Drawing.Point(213, 252);
+            this.fiyatbelirle_btn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
+            this.fiyatbelirle_btn.Location = new System.Drawing.Point(208, 264);
             this.fiyatbelirle_btn.Name = "fiyatbelirle_btn";
-            this.fiyatbelirle_btn.Size = new System.Drawing.Size(117, 37);
+            this.fiyatbelirle_btn.Size = new System.Drawing.Size(132, 37);
             this.fiyatbelirle_btn.TabIndex = 3;
             this.fiyatbelirle_btn.Text = "Onayla";
             this.fiyatbelirle_btn.UseVisualStyleBackColor = true;
@@ -72,11 +72,13 @@
             // fiyatb_lbl
             // 
             this.fiyatb_lbl.AutoSize = true;
-            this.fiyatb_lbl.Location = new System.Drawing.Point(185, 98);
+            this.fiyatb_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.fiyatb_lbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.fiyatb_lbl.Location = new System.Drawing.Point(205, 85);
             this.fiyatb_lbl.Name = "fiyatb_lbl";
-            this.fiyatb_lbl.Size = new System.Drawing.Size(169, 13);
+            this.fiyatb_lbl.Size = new System.Drawing.Size(135, 32);
             this.fiyatb_lbl.TabIndex = 10;
-            this.fiyatb_lbl.Text = "Hangi Fiyattan almak istiyorsunuz?";
+            this.fiyatb_lbl.Text = "   Hangi Fiyattan \r\nalmak istiyorsunuz?";
             // 
             // fiyatbelirle
             // 
@@ -94,7 +96,6 @@
             this.Name = "fiyatbelirle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fiyatbelirle";
-            //this.Load += new System.EventHandler(this.fiyatbelirle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

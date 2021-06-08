@@ -28,5 +28,10 @@ namespace Proje_Ödevi
         {
             Application.Exit();
         }
+
+        private void raporal_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

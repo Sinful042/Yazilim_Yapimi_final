@@ -38,7 +38,6 @@ namespace Proje_Ödevi
             satin_al.Show();
             this.Hide();
         }
-
         private void fiyatbelirle_btn_Click(object sender, EventArgs e)
         {
             //Alicin değer girip girilmediği kontrol ediliyor
@@ -205,9 +204,6 @@ namespace Proje_Ödevi
 
         }
 
-
-
-
-
+      
     } 
 }

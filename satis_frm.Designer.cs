@@ -41,46 +41,56 @@
             // 
             this.birimdeger_lbl.AutoSize = true;
             this.birimdeger_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.birimdeger_lbl.Font = new System.Drawing.Font("Georgia", 12F);
-            this.birimdeger_lbl.Location = new System.Drawing.Point(145, 124);
+            this.birimdeger_lbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.birimdeger_lbl.Location = new System.Drawing.Point(165, 95);
             this.birimdeger_lbl.Name = "birimdeger_lbl";
-            this.birimdeger_lbl.Size = new System.Drawing.Size(227, 18);
+            this.birimdeger_lbl.Size = new System.Drawing.Size(206, 16);
             this.birimdeger_lbl.TabIndex = 0;
             this.birimdeger_lbl.Text = "Ne kadar satmak istiyorsunuz?";
             // 
             // birimdeger
             // 
-            this.birimdeger.Location = new System.Drawing.Point(169, 154);
+            this.birimdeger.ForeColor = System.Drawing.Color.Silver;
+            this.birimdeger.Location = new System.Drawing.Point(168, 127);
             this.birimdeger.Name = "birimdeger";
             this.birimdeger.Size = new System.Drawing.Size(175, 20);
             this.birimdeger.TabIndex = 1;
+            this.birimdeger.Text = "Satmak istediğiniz miktarı giriniz";
+            this.birimdeger.Enter += new System.EventHandler(this.birimdeger_Enter);
+            this.birimdeger.Leave += new System.EventHandler(this.birimdeger_Leave);
             // 
             // onay_btn
             // 
-            this.onay_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.onay_btn.Location = new System.Drawing.Point(197, 303);
+            this.onay_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.onay_btn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
+            this.onay_btn.ForeColor = System.Drawing.Color.Black;
+            this.onay_btn.Location = new System.Drawing.Point(168, 263);
             this.onay_btn.Name = "onay_btn";
-            this.onay_btn.Size = new System.Drawing.Size(117, 37);
+            this.onay_btn.Size = new System.Drawing.Size(175, 37);
             this.onay_btn.TabIndex = 2;
             this.onay_btn.Text = "Onayla";
-            this.onay_btn.UseVisualStyleBackColor = true;
+            this.onay_btn.UseVisualStyleBackColor = false;
             this.onay_btn.Click += new System.EventHandler(this.onay_btn_Click);
             // 
             // birimfiyat
             // 
-            this.birimfiyat.Location = new System.Drawing.Point(169, 258);
+            this.birimfiyat.ForeColor = System.Drawing.Color.Silver;
+            this.birimfiyat.Location = new System.Drawing.Point(168, 204);
             this.birimfiyat.Name = "birimfiyat";
             this.birimfiyat.Size = new System.Drawing.Size(175, 20);
             this.birimfiyat.TabIndex = 4;
+            this.birimfiyat.Text = "Satmak istediğiniz birim fiyatı giriniz";
+            this.birimfiyat.Enter += new System.EventHandler(this.birimfiyat_Enter);
+            this.birimfiyat.Leave += new System.EventHandler(this.birimfiyat_Leave);
             // 
             // birimfiyat_lbl
             // 
             this.birimfiyat_lbl.AutoSize = true;
             this.birimfiyat_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.birimfiyat_lbl.Font = new System.Drawing.Font("Georgia", 12F);
-            this.birimfiyat_lbl.Location = new System.Drawing.Point(170, 227);
+            this.birimfiyat_lbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.birimfiyat_lbl.Location = new System.Drawing.Point(165, 173);
             this.birimfiyat_lbl.Name = "birimfiyat_lbl";
-            this.birimfiyat_lbl.Size = new System.Drawing.Size(170, 18);
+            this.birimfiyat_lbl.Size = new System.Drawing.Size(146, 16);
             this.birimfiyat_lbl.TabIndex = 3;
             this.birimfiyat_lbl.Text = "Birim Fiyat Belirleyiniz";
             // 
@@ -118,7 +128,7 @@
             this.Name = "satis_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Şatış Yap";
-            this.Load += new System.EventHandler(this.satis_frm_Load);
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 

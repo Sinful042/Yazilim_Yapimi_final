@@ -40,21 +40,24 @@
             // 
             // raporal
             // 
-            this.raporal.Location = new System.Drawing.Point(110, 334);
+            this.raporal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.raporal.Location = new System.Drawing.Point(108, 334);
             this.raporal.Name = "raporal";
-            this.raporal.Size = new System.Drawing.Size(100, 38);
+            this.raporal.Size = new System.Drawing.Size(112, 38);
             this.raporal.TabIndex = 0;
             this.raporal.Text = "rapor oluştur";
             this.raporal.UseVisualStyleBackColor = true;
+            this.raporal.Click += new System.EventHandler(this.raporal_Click);
             // 
             // raporturu
             // 
+            this.raporturu.ForeColor = System.Drawing.Color.Silver;
             this.raporturu.FormattingEnabled = true;
             this.raporturu.Items.AddRange(new object[] {
             "Alış Raporu",
             "Satış Raporu",
             "Alış-Satış Raporu"});
-            this.raporturu.Location = new System.Drawing.Point(108, 215);
+            this.raporturu.Location = new System.Drawing.Point(108, 222);
             this.raporturu.Name = "raporturu";
             this.raporturu.Size = new System.Drawing.Size(121, 21);
             this.raporturu.TabIndex = 1;
@@ -62,10 +65,11 @@
             // 
             // urunler
             // 
+            this.urunler.ForeColor = System.Drawing.Color.Silver;
             this.urunler.FormattingEnabled = true;
             this.urunler.Items.AddRange(new object[] {
             "kullanıcı adına göre ürünleri comboboxlara at"});
-            this.urunler.Location = new System.Drawing.Point(108, 102);
+            this.urunler.Location = new System.Drawing.Point(108, 98);
             this.urunler.Name = "urunler";
             this.urunler.Size = new System.Drawing.Size(121, 21);
             this.urunler.TabIndex = 3;
@@ -73,6 +77,7 @@
             // 
             // Btarih
             // 
+            this.Btarih.ForeColor = System.Drawing.Color.Silver;
             this.Btarih.FormattingEnabled = true;
             this.Btarih.Items.AddRange(new object[] {
             "Yukarda seçilen ürüne göre"});
@@ -84,6 +89,7 @@
             // 
             // Starih
             // 
+            this.Starih.ForeColor = System.Drawing.Color.Silver;
             this.Starih.FormattingEnabled = true;
             this.Starih.Items.AddRange(new object[] {
             "Yukarda seçilen ürüne göre"});
@@ -95,6 +101,7 @@
             // 
             // gerirapor
             // 
+            this.gerirapor.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gerirapor.Location = new System.Drawing.Point(242, 334);
             this.gerirapor.Name = "gerirapor";
             this.gerirapor.Size = new System.Drawing.Size(112, 38);

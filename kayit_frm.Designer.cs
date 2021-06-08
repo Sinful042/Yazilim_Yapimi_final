@@ -47,11 +47,11 @@
             // kayit_btn
             // 
             this.kayit_btn.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.kayit_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.kayit_btn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.kayit_btn.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.kayit_btn.Location = new System.Drawing.Point(357, 383);
+            this.kayit_btn.Location = new System.Drawing.Point(396, 464);
             this.kayit_btn.Name = "kayit_btn";
-            this.kayit_btn.Size = new System.Drawing.Size(122, 39);
+            this.kayit_btn.Size = new System.Drawing.Size(150, 39);
             this.kayit_btn.TabIndex = 8;
             this.kayit_btn.Text = "Kayıt Ol";
             this.kayit_btn.UseVisualStyleBackColor = false;
@@ -62,12 +62,11 @@
             this.ad.BackColor = System.Drawing.SystemColors.Window;
             this.ad.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.ad.ForeColor = System.Drawing.Color.Silver;
-            this.ad.Location = new System.Drawing.Point(156, 24);
+            this.ad.Location = new System.Drawing.Point(34, 142);
             this.ad.Name = "ad";
-            this.ad.Size = new System.Drawing.Size(200, 27);
+            this.ad.Size = new System.Drawing.Size(150, 27);
             this.ad.TabIndex = 9;
             this.ad.Text = "Ad";
-            this.ad.TextChanged += new System.EventHandler(this.ad_TextChanged);
             this.ad.Enter += new System.EventHandler(this.ad_Enter);
             this.ad.Leave += new System.EventHandler(this.ad_Leave);
             // 
@@ -75,9 +74,9 @@
             // 
             this.soyad.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.soyad.ForeColor = System.Drawing.Color.Silver;
-            this.soyad.Location = new System.Drawing.Point(156, 64);
+            this.soyad.Location = new System.Drawing.Point(34, 175);
             this.soyad.Name = "soyad";
-            this.soyad.Size = new System.Drawing.Size(200, 27);
+            this.soyad.Size = new System.Drawing.Size(150, 27);
             this.soyad.TabIndex = 10;
             this.soyad.Text = "Soyad";
             this.soyad.Enter += new System.EventHandler(this.soyad_Enter);
@@ -87,9 +86,9 @@
             // 
             this.kullanici_adi.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.kullanici_adi.ForeColor = System.Drawing.Color.Silver;
-            this.kullanici_adi.Location = new System.Drawing.Point(156, 104);
+            this.kullanici_adi.Location = new System.Drawing.Point(34, 208);
             this.kullanici_adi.Name = "kullanici_adi";
-            this.kullanici_adi.Size = new System.Drawing.Size(200, 27);
+            this.kullanici_adi.Size = new System.Drawing.Size(150, 27);
             this.kullanici_adi.TabIndex = 11;
             this.kullanici_adi.Text = "Kullanıcı-Adı";
             this.kullanici_adi.Enter += new System.EventHandler(this.kullanici_adi_Enter);
@@ -99,9 +98,9 @@
             // 
             this.email.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.email.ForeColor = System.Drawing.Color.Silver;
-            this.email.Location = new System.Drawing.Point(156, 265);
+            this.email.Location = new System.Drawing.Point(396, 206);
             this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(200, 27);
+            this.email.Size = new System.Drawing.Size(150, 27);
             this.email.TabIndex = 13;
             this.email.Text = "E-mail";
             this.email.Enter += new System.EventHandler(this.email_Enter);
@@ -111,10 +110,10 @@
             // 
             this.telefon.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.telefon.ForeColor = System.Drawing.Color.Silver;
-            this.telefon.Location = new System.Drawing.Point(156, 345);
+            this.telefon.Location = new System.Drawing.Point(396, 346);
             this.telefon.MaxLength = 11;
             this.telefon.Name = "telefon";
-            this.telefon.Size = new System.Drawing.Size(200, 27);
+            this.telefon.Size = new System.Drawing.Size(150, 27);
             this.telefon.TabIndex = 14;
             this.telefon.Text = "Telefon";
             this.telefon.Enter += new System.EventHandler(this.telefon_Enter);
@@ -124,9 +123,9 @@
             // 
             this.sifre.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.sifre.ForeColor = System.Drawing.Color.Silver;
-            this.sifre.Location = new System.Drawing.Point(156, 144);
+            this.sifre.Location = new System.Drawing.Point(34, 300);
             this.sifre.Name = "sifre";
-            this.sifre.Size = new System.Drawing.Size(200, 27);
+            this.sifre.Size = new System.Drawing.Size(150, 27);
             this.sifre.TabIndex = 15;
             this.sifre.Text = "Parola";
             this.sifre.Enter += new System.EventHandler(this.sifre_Enter);
@@ -136,10 +135,10 @@
             // 
             this.tc.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.tc.ForeColor = System.Drawing.Color.Silver;
-            this.tc.Location = new System.Drawing.Point(156, 225);
+            this.tc.Location = new System.Drawing.Point(396, 160);
             this.tc.MaxLength = 11;
             this.tc.Name = "tc";
-            this.tc.Size = new System.Drawing.Size(200, 27);
+            this.tc.Size = new System.Drawing.Size(150, 27);
             this.tc.TabIndex = 16;
             this.tc.Text = "TC";
             this.tc.Enter += new System.EventHandler(this.tc_Enter);
@@ -149,9 +148,9 @@
             // 
             this.adres.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.adres.ForeColor = System.Drawing.Color.Silver;
-            this.adres.Location = new System.Drawing.Point(156, 305);
+            this.adres.Location = new System.Drawing.Point(396, 300);
             this.adres.Name = "adres";
-            this.adres.Size = new System.Drawing.Size(200, 27);
+            this.adres.Size = new System.Drawing.Size(150, 27);
             this.adres.TabIndex = 17;
             this.adres.Text = "Adres";
             this.adres.Enter += new System.EventHandler(this.adres_Enter);
@@ -165,7 +164,7 @@
             this.cikiskayit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cikiskayit.Font = new System.Drawing.Font("Forte", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cikiskayit.ForeColor = System.Drawing.Color.Brown;
-            this.cikiskayit.Location = new System.Drawing.Point(468, -2);
+            this.cikiskayit.Location = new System.Drawing.Point(546, -4);
             this.cikiskayit.Name = "cikiskayit";
             this.cikiskayit.Size = new System.Drawing.Size(32, 36);
             this.cikiskayit.TabIndex = 18;
@@ -176,12 +175,12 @@
             // gerikayit
             // 
             this.gerikayit.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.gerikayit.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.gerikayit.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.gerikayit.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.gerikayit.Location = new System.Drawing.Point(12, 383);
+            this.gerikayit.Location = new System.Drawing.Point(34, 464);
             this.gerikayit.Name = "gerikayit";
             this.gerikayit.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gerikayit.Size = new System.Drawing.Size(122, 39);
+            this.gerikayit.Size = new System.Drawing.Size(150, 39);
             this.gerikayit.TabIndex = 19;
             this.gerikayit.Text = "Geri";
             this.gerikayit.UseVisualStyleBackColor = false;
@@ -193,7 +192,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Stencil", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Cornsilk;
-            this.label2.Location = new System.Drawing.Point(-6, 17);
+            this.label2.Location = new System.Drawing.Point(217, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 47);
             this.label2.TabIndex = 20;
@@ -203,9 +202,9 @@
             // 
             this.sifretekrar.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.sifretekrar.ForeColor = System.Drawing.Color.Silver;
-            this.sifretekrar.Location = new System.Drawing.Point(156, 185);
+            this.sifretekrar.Location = new System.Drawing.Point(34, 346);
             this.sifretekrar.Name = "sifretekrar";
-            this.sifretekrar.Size = new System.Drawing.Size(200, 27);
+            this.sifretekrar.Size = new System.Drawing.Size(150, 27);
             this.sifretekrar.TabIndex = 22;
             this.sifretekrar.Text = "Parola-Tekrar";
             this.sifretekrar.Enter += new System.EventHandler(this.sifretekrar_Enter);
@@ -216,8 +215,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(498, 473);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(575, 575);
             this.Controls.Add(this.sifretekrar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.gerikayit);

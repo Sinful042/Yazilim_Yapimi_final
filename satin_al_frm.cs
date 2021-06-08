@@ -25,7 +25,6 @@ namespace Proje_Ödevi
         int muhasebe_ucret;
        
 
-
         public satin_al_frm()
         {
             InitializeComponent();
@@ -73,20 +72,17 @@ namespace Proje_Ödevi
             OleDbDataAdapter liste = new OleDbDataAdapter("select UrunAdi,UrunBirim,UrunTuru from Urunler", baglanti);
             liste.Fill(tablo);
             
-            dataGridView1.DataSource = tablo;
+            urunlersatinal.DataSource = tablo;
 
-            dataGridView1.ReadOnly = true;
+            urunlersatinal.ReadOnly = true;
             
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.DarkGreen;
+            urunlersatinal.DefaultCellStyle.SelectionBackColor = Color.White;
+            urunlersatinal.DefaultCellStyle.SelectionForeColor = Color.DarkGreen;
             baglanti.Close();
 
         }
 
-        private void admin_label_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void cikisanasayfa_Click(object sender, EventArgs e)
         {
@@ -98,48 +94,48 @@ namespace Proje_Ödevi
             baglanti.Open();
             OleDbDataAdapter liste = new OleDbDataAdapter("select  UrunAdi,UrunBirim,UrunTuru from Urunler where UrunTuru = '" + UrunTuru + "'", baglanti);
             liste.Fill(tablo);
-            dataGridView1.DataSource = tablo;
+            urunlersatinal.DataSource = tablo;
             baglanti.Close();
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            if (filtre_cmbx.SelectedIndex == 0)
             {
                 tablo.Clear();
                 filitre = "Yiyecek";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 1)
+            else if (filtre_cmbx.SelectedIndex == 1)
             {
                 tablo.Clear();
                 filitre = "Giysi";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 2)
+            else if (filtre_cmbx.SelectedIndex == 2)
             {
                 tablo.Clear();
                 filitre = "Hammadde";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 3)
+            else if (filtre_cmbx.SelectedIndex == 3)
             {
                 tablo.Clear();
                 filitre = "Kırtasiye";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 4)
+            else if (filtre_cmbx.SelectedIndex == 4)
             {
                 tablo.Clear();
                 filitre = "Elektronik";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 5)
+            else if (filtre_cmbx.SelectedIndex == 5)
             {
                 tablo.Clear();
                 filitre = "Aksesuar";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex == 6)
+            else if (filtre_cmbx.SelectedIndex == 6)
             {
                 tablo.Clear();
                 filitre = "Mutfak";
@@ -156,36 +152,52 @@ namespace Proje_Ödevi
 
         private void satin_al_piyasa_Click(object sender, EventArgs e)
         {
-            if (birim.Text=="")
+            if (birim.Text== "Lütfen birim giriniz")
             {
-                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Tamam");
+               
+                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 fiyatbelirle fiyatbelirle = new fiyatbelirle();
-                istek_ürün = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
+                istek_ürün = urunlersatinal.CurrentRow.Cells["UrunAdi"].Value.ToString();
                 fiyatbelirle.istek_birim = Int32.Parse(birim.Text);
                 fiyatbelirle.alici_kullanici_adi = alici_kullanici_adi;
                 fiyatbelirle.istek_ürün = istek_ürün;
                 fiyatbelirle.alici_para = Int32.Parse(para);
                 fiyatbelirle.Show();
-                this.Hide();
+                
             }
             
 
         }
 
-        private void lbl_para_Click(object sender, EventArgs e)
+        private void birim_Enter(object sender, EventArgs e)
         {
-
+            if (birim.Text == "Lütfen birim giriniz")
+            {
+                birim.Text = "";
+                birim.ForeColor = Color.Black;
+            }
         }
+
+        private void birim_Leave(object sender, EventArgs e)
+        {
+            if (birim.Text == "")
+            {
+                birim.Text = "Lütfen birim giriniz";
+                birim.ForeColor = Color.Silver;
+            }
+        }
+
+        
         
 
         private void satın_al_btn_Click(object sender, EventArgs e)
         {
-            if (birim.Text == "")
+            if (birim.Text == "Lütfen birim giriniz")
             {
-                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Tamam");
+                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -194,7 +206,7 @@ namespace Proje_Ödevi
                 alinan_miktar = 0;
                 gonderilen_para = 0;
                 istek_miktar = Convert.ToInt32(birim.Text);
-                istek_ürün = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
+                istek_ürün = urunlersatinal.CurrentRow.Cells["UrunAdi"].Value.ToString();
                 baglanti.Open();
                 OleDbCommand komut = new OleDbCommand();
                 komut.Connection = baglanti;
@@ -227,7 +239,7 @@ namespace Proje_Ödevi
                         }
                         else
                         {
-                            MessageBox.Show("Bakiyeniz Yeterli değildir!", "Tamam");
+                            MessageBox.Show("Bakiyeniz Yeterli değildir!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
 
@@ -252,7 +264,7 @@ namespace Proje_Ödevi
                         }
                         else
                         {
-                            MessageBox.Show("Bakiyeniz Yeterli değildir!", "Tamam");
+                            MessageBox.Show("Bakiyeniz Yeterli değildir!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
 

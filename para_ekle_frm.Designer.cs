@@ -34,32 +34,38 @@
             this.ekle_btn = new System.Windows.Forms.Button();
             this.cikisparaekle = new System.Windows.Forms.Button();
             this.paratip = new System.Windows.Forms.ComboBox();
+            this.istekparatip_lbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // istek_para_lbl
             // 
             this.istek_para_lbl.AutoSize = true;
             this.istek_para_lbl.BackColor = System.Drawing.Color.Transparent;
-            this.istek_para_lbl.Font = new System.Drawing.Font("Georgia", 8F);
-            this.istek_para_lbl.Location = new System.Drawing.Point(90, 208);
+            this.istek_para_lbl.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.istek_para_lbl.Location = new System.Drawing.Point(65, 204);
             this.istek_para_lbl.Name = "istek_para_lbl";
-            this.istek_para_lbl.Size = new System.Drawing.Size(110, 28);
+            this.istek_para_lbl.Size = new System.Drawing.Size(158, 38);
             this.istek_para_lbl.TabIndex = 2;
             this.istek_para_lbl.Text = "Ne kadar eklemek\r\n    istiyorsunuz?";
             // 
             // istek_para
             // 
-            this.istek_para.Location = new System.Drawing.Point(58, 269);
+            this.istek_para.ForeColor = System.Drawing.Color.Silver;
+            this.istek_para.HideSelection = false;
+            this.istek_para.Location = new System.Drawing.Point(65, 269);
             this.istek_para.Name = "istek_para";
-            this.istek_para.Size = new System.Drawing.Size(174, 20);
+            this.istek_para.Size = new System.Drawing.Size(167, 20);
             this.istek_para.TabIndex = 3;
+            this.istek_para.Text = "Lütfen Miktarı giriniz";
+            this.istek_para.Enter += new System.EventHandler(this.istek_para_Enter);
+            this.istek_para.Leave += new System.EventHandler(this.istek_para_Leave);
             // 
             // ekle_btn
             // 
-            this.ekle_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.ekle_btn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.ekle_btn.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.ekle_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ekle_btn.Location = new System.Drawing.Point(83, 330);
+            this.ekle_btn.Location = new System.Drawing.Point(84, 333);
             this.ekle_btn.Name = "ekle_btn";
             this.ekle_btn.Size = new System.Drawing.Size(117, 37);
             this.ekle_btn.TabIndex = 4;
@@ -85,12 +91,24 @@
             // 
             // paratip
             // 
+            this.paratip.ForeColor = System.Drawing.Color.Silver;
             this.paratip.FormattingEnabled = true;
-            this.paratip.Location = new System.Drawing.Point(83, 139);
+            this.paratip.Location = new System.Drawing.Point(65, 149);
             this.paratip.Name = "paratip";
-            this.paratip.Size = new System.Drawing.Size(130, 21);
+            this.paratip.Size = new System.Drawing.Size(167, 21);
             this.paratip.TabIndex = 8;
             this.paratip.Text = "Para Tipini Seçiniz";
+            // 
+            // istekparatip_lbl
+            // 
+            this.istekparatip_lbl.AutoSize = true;
+            this.istekparatip_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.istekparatip_lbl.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.istekparatip_lbl.Location = new System.Drawing.Point(61, 92);
+            this.istekparatip_lbl.Name = "istekparatip_lbl";
+            this.istekparatip_lbl.Size = new System.Drawing.Size(178, 38);
+            this.istekparatip_lbl.TabIndex = 9;
+            this.istekparatip_lbl.Text = "Eklemek istediğiniz \r\nparanın tipini seçiniz";
             // 
             // para_ekle_frm
             // 
@@ -99,6 +117,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(450, 450);
+            this.Controls.Add(this.istekparatip_lbl);
             this.Controls.Add(this.paratip);
             this.Controls.Add(this.cikisparaekle);
             this.Controls.Add(this.ekle_btn);
@@ -109,7 +128,7 @@
             this.Name = "para_ekle_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para Ekle";
-            this.Load += new System.EventHandler(this.para_ekle_frm_Load);
+          
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +140,6 @@
         private System.Windows.Forms.Button ekle_btn;
         private System.Windows.Forms.Button cikisparaekle;
         private System.Windows.Forms.ComboBox paratip;
+        private System.Windows.Forms.Label istekparatip_lbl;
     }
 }

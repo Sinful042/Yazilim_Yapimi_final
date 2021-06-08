@@ -44,7 +44,7 @@
             // 
             this.para_list_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
             this.para_list_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.para_list_btn.Location = new System.Drawing.Point(36, 316);
+            this.para_list_btn.Location = new System.Drawing.Point(18, 329);
             this.para_list_btn.Name = "para_list_btn";
             this.para_list_btn.Size = new System.Drawing.Size(138, 37);
             this.para_list_btn.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             this.satis_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
             this.satis_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.satis_btn.Location = new System.Drawing.Point(310, 316);
+            this.satis_btn.Location = new System.Drawing.Point(310, 329);
             this.satis_btn.Name = "satis_btn";
             this.satis_btn.Size = new System.Drawing.Size(138, 37);
             this.satis_btn.TabIndex = 1;
@@ -68,7 +68,7 @@
             // 
             this.cikis_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
             this.cikis_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cikis_btn.Location = new System.Drawing.Point(589, 316);
+            this.cikis_btn.Location = new System.Drawing.Point(616, 329);
             this.cikis_btn.Name = "cikis_btn";
             this.cikis_btn.Size = new System.Drawing.Size(117, 37);
             this.cikis_btn.TabIndex = 2;
@@ -102,7 +102,6 @@
             this.dataGridViewSo.Name = "dataGridViewSo";
             this.dataGridViewSo.Size = new System.Drawing.Size(715, 226);
             this.dataGridViewSo.TabIndex = 17;
-            this.dataGridViewSo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSo_CellContentClick);
             // 
             // label2
             // 

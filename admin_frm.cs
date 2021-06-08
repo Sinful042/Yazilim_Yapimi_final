@@ -40,9 +40,6 @@ namespace Proje_Ödevi
 
         }
 
-
-
-
         private void cikis_btn_Click(object sender, EventArgs e)
         {
             Giris_frm giris = new Giris_frm();
@@ -79,9 +76,6 @@ namespace Proje_Ödevi
             Application.Exit();
         }
 
-        private void dataGridViewSo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }

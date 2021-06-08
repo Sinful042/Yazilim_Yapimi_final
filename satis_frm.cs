@@ -11,7 +11,6 @@ using System.Data.OleDb;
 
 namespace Proje_Ödevi
 {
-    
     public partial class satis_frm : Form
     {
         public string Kullanici_adi;
@@ -77,9 +76,40 @@ namespace Proje_Ödevi
             anasayfa.Show();
         }
 
-        private void satis_frm_Load(object sender, EventArgs e)
+        private void birimdeger_Enter(object sender, EventArgs e)
         {
+            if (birimdeger.Text == "Satmak istediğiniz miktarı giriniz")
+            {
+                birimdeger.Text = "";
+                birimdeger.ForeColor = Color.Black;
+            }
+        }
 
+        private void birimdeger_Leave(object sender, EventArgs e)
+        {
+            if (birimdeger.Text == "")
+            {
+                birimdeger.Text = "Satmak istediğiniz miktarı giriniz";
+                birimdeger.ForeColor = Color.Silver;
+            }
+        }
+
+        private void birimfiyat_Enter(object sender, EventArgs e)
+        {
+            if (birimfiyat.Text == "Satmak istediğiniz birim fiyatı giriniz")
+            {
+                birimfiyat.Text = "";
+                birimfiyat.ForeColor = Color.Black;
+            }
+        }
+
+        private void birimfiyat_Leave(object sender, EventArgs e)
+        {
+              if (birimfiyat.Text == "")
+              {
+                birimfiyat.Text = "Satmak istediğiniz birim fiyatı giriniz";
+                birimfiyat.ForeColor = Color.Silver;
+              }
         }
     }
 }

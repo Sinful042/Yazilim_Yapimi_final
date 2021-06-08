@@ -279,9 +279,6 @@ namespace Proje_Ödevi
 
         }
 
-        private void ad_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

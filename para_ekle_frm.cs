@@ -26,8 +26,6 @@ namespace Proje_Ödevi
                 {
                     MessageBox.Show("Lütfen miktar Giriniz.", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     
-
-
                 }
 
             
@@ -46,19 +44,34 @@ namespace Proje_Ödevi
             baglanti.Close();
             MessageBox.Show("Para İsteme Alınmıştır","Tamam");
             this.Hide();
-
+            
         }
 
-        private void para_ekle_frm_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void cikisparaekle_Click(object sender, EventArgs e)
         {
             ana_fr anasayfa = new ana_fr();
             anasayfa.Show();
 
+        }
+
+        private void istek_para_Enter(object sender, EventArgs e)
+        {
+            if (istek_para.Text == "Lütfen Miktarı giriniz")
+            {
+                istek_para.Text = "";
+                istek_para.ForeColor = Color.Black;
+            }
+        }
+
+        private void istek_para_Leave(object sender, EventArgs e)
+        {
+            if (istek_para.Text == "")
+            {
+                istek_para.Text = "Lütfen Miktarı giriniz";
+                istek_para.ForeColor = Color.Silver;
+            }
         }
     }
 }

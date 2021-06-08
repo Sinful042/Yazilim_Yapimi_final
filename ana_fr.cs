@@ -23,9 +23,6 @@ namespace Proje_Ödevi
         }
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         DataTable tablo = new DataTable();
-       
-           
-
         private void ana_fr_Load(object sender, EventArgs e)
         {
             kullanici_lbl.Text = Kullanici_adi;
@@ -48,13 +45,12 @@ namespace Proje_Ödevi
             baglanti.Open();
             OleDbDataAdapter liste = new OleDbDataAdapter("select UrunAdi,UrunMiktar,UrunBirim from kUrun where KullaniciU = '"+Kullanici_adi+"'", baglanti);
             liste.Fill(tablo);
-            dataGridView1.DataSource = tablo;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Red;
+            urunlistele.DataSource = tablo;
+            urunlistele.DefaultCellStyle.SelectionBackColor = Color.White;
+            urunlistele.DefaultCellStyle.SelectionForeColor = Color.Red;
             baglanti.Close();
 
         }
-
         private void para_ekle_btn_Click(object sender, EventArgs e)
         {
             para_ekle_frm para_ekle = new para_ekle_frm();
@@ -63,17 +59,6 @@ namespace Proje_Ödevi
            
             
         }
-
-        private void para_lbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void cikisanasayfa_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -83,7 +68,7 @@ namespace Proje_Ödevi
         {
             satis_frm satis = new satis_frm();
             satis.Kullanici_adi = Kullanici_adi;
-            satis.Urun_id = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
+            satis.Urun_id = urunlistele.CurrentRow.Cells["UrunAdi"].Value.ToString();
             satis.ShowDialog();
             tablo.Clear();
             listele();
@@ -98,10 +83,11 @@ namespace Proje_Ödevi
             ürün_al.Show();
             this.Hide();
         }
-
-        private void kullanici_lbl_Click(object sender, EventArgs e)
+        private void avatar_Click(object sender, EventArgs e)
         {
-
+            hesap hesap = new hesap();
+            hesap.Show();
+            this.Hide();
         }
     }
 }

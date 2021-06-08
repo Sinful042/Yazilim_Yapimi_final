@@ -28,8 +28,8 @@ namespace Proje_Ödevi
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void onay_btn_Click(object sender, EventArgs e)
         {
-            istek_miktar = Convert.ToInt32(textBox1.Text);
-            birim_fiyat = Convert.ToInt32(textBox2.Text);
+            istek_miktar = Convert.ToInt32(birimdeger.Text);
+            birim_fiyat = Convert.ToInt32(birimfiyat.Text);
             baglanti.Open();
             OleDbCommand sorgu = new OleDbCommand("select *from kUrun where KullaniciU= '" + Kullanici_adi + "'and UrunAdi='"+Urun_id+"'", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();

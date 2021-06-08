@@ -51,6 +51,18 @@
     <Compile Include="admin_frm.Designer.cs">
       <DependentUpon>admin_frm.cs</DependentUpon>
     </Compile>
+    <Compile Include="fiyatbelirle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fiyatbelirle.Designer.cs">
+      <DependentUpon>fiyatbelirle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hesap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hesap.Designer.cs">
+      <DependentUpon>hesap.cs</DependentUpon>
+    </Compile>
     <Compile Include="para_ist_frm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +95,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rapor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rapor.Designer.cs">
+      <DependentUpon>rapor.cs</DependentUpon>
+    </Compile>
     <Compile Include="satin_al_frm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +121,12 @@
     </Compile>
     <EmbeddedResource Include="admin_frm.resx">
       <DependentUpon>admin_frm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fiyatbelirle.resx">
+      <DependentUpon>fiyatbelirle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hesap.resx">
+      <DependentUpon>hesap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="para_ist_frm.resx">
       <DependentUpon>para_ist_frm.cs</DependentUpon>
@@ -129,6 +153,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="rapor.resx">
+      <DependentUpon>rapor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="satin_al_frm.resx">
       <DependentUpon>satin_al_frm.cs</DependentUpon>
     </EmbeddedResource>

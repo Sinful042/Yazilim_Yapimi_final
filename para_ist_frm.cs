@@ -25,7 +25,7 @@ namespace Proje_Ödevi
         {
             InitializeComponent();
         }
-        OleDbConnection baglanti = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=odev1234.mdb");
+        OleDbConnection baglanti = Giris_frm.baglanti_kur();
         DataTable tablo = new DataTable();
         private void cikis_btn_Click(object sender, EventArgs e)
         {

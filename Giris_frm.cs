@@ -29,16 +29,14 @@ namespace Proje_Ödevi
             }
             return connect;
         }
+
         OleDbConnection baglanti = baglanti_kur();
         private void kayit_btn_Click(object sender, EventArgs e)
         {
             kayit_frm kayit = new kayit_frm();
             kayit.Show();
             this.Hide();
-
         }
-
-        
         private void gris_btn_Click(object sender, EventArgs e)
         {
             
@@ -65,7 +63,6 @@ namespace Proje_Ödevi
                     this.Hide();
                     break;
                 }
-                
             }
             if (kullacini_txt.Text == " " || sifre_txt.Text=="")
             {
@@ -75,28 +72,16 @@ namespace Proje_Ödevi
             {
                 MessageBox.Show("Kullanici Adi veya Şifre Yanlış", "Tamam");
             }
-            
             baglanti.Close();
-            
-            
-            
         }
-
-        private void Giris_frm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void kullacini_txt_Enter(object sender, EventArgs e)
         {
             if(kullacini_txt.Text=="Kullanıcı-Adı")
             {
                 kullacini_txt.Text = "";
                 kullacini_txt.ForeColor = Color.Black;
-
             }
         }
-
         private void kullacini_txt_Leave(object sender, EventArgs e)
         {
             if (kullacini_txt.Text == "")
@@ -105,7 +90,6 @@ namespace Proje_Ödevi
                 kullacini_txt.ForeColor = Color.Silver;
             }
         }
-
         private void sifre_txt_Enter(object sender, EventArgs e)
         {
             if (sifre_txt.Text == "Parola")
@@ -115,6 +99,7 @@ namespace Proje_Ödevi
                 sifre_txt.ForeColor = Color.Black;
             }
         }
+
         char? passwordgiris = null;
         private void sifre_txt_Leave(object sender, EventArgs e)
         {
@@ -125,15 +110,9 @@ namespace Proje_Ödevi
                 sifre_txt.ForeColor = Color.Silver;
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

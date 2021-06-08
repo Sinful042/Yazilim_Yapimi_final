@@ -157,6 +157,13 @@ namespace Proje_Ödevi
             }
         }
 
+        private void satin_al_piyasa_Click(object sender, EventArgs e)
+        {
+            fiyatbelirle fiyatbelirle = new fiyatbelirle();
+            fiyatbelirle.Show();
+            
+        }
+
         private void lbl_para_Click(object sender, EventArgs e)
         {
 

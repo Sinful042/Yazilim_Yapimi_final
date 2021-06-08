@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_para = new System.Windows.Forms.Label();
             this.cikisanasayfa = new System.Windows.Forms.Button();
+            this.satin_al_piyasa = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +100,11 @@
             // 
             this.satın_al_btn.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.satın_al_btn.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
-            this.satın_al_btn.Location = new System.Drawing.Point(337, 385);
+            this.satın_al_btn.Location = new System.Drawing.Point(232, 392);
             this.satın_al_btn.Name = "satın_al_btn";
-            this.satın_al_btn.Size = new System.Drawing.Size(102, 37);
+            this.satın_al_btn.Size = new System.Drawing.Size(158, 37);
             this.satın_al_btn.TabIndex = 15;
-            this.satın_al_btn.Text = "Satın Al";
+            this.satın_al_btn.Text = "Piyasadan Al";
             this.satın_al_btn.UseVisualStyleBackColor = false;
             this.satın_al_btn.Click += new System.EventHandler(this.satın_al_btn_Click);
             // 
@@ -131,11 +132,11 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label2.Font = new System.Drawing.Font("Georgia", 15F);
-            this.label2.Location = new System.Drawing.Point(257, 322);
+            this.label2.Location = new System.Drawing.Point(255, 315);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(276, 24);
+            this.label2.Size = new System.Drawing.Size(283, 24);
             this.label2.TabIndex = 22;
-            this.label2.Text = "Ne kadar almak istiyorsunuz?";
+            this.label2.Text = "Kaç birim almak istiyorsunuz?";
             // 
             // label3
             // 
@@ -178,6 +179,18 @@
             this.cikisanasayfa.UseVisualStyleBackColor = false;
             this.cikisanasayfa.Click += new System.EventHandler(this.cikisanasayfa_Click);
             // 
+            // satin_al_piyasa
+            // 
+            this.satin_al_piyasa.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.satin_al_piyasa.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.satin_al_piyasa.Location = new System.Drawing.Point(396, 392);
+            this.satin_al_piyasa.Name = "satin_al_piyasa";
+            this.satin_al_piyasa.Size = new System.Drawing.Size(158, 37);
+            this.satin_al_piyasa.TabIndex = 26;
+            this.satin_al_piyasa.Text = "Fiyat Belirle";
+            this.satin_al_piyasa.UseVisualStyleBackColor = false;
+            this.satin_al_piyasa.Click += new System.EventHandler(this.satin_al_piyasa_Click);
+            // 
             // satin_al_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +198,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(774, 441);
+            this.Controls.Add(this.satin_al_piyasa);
             this.Controls.Add(this.cikisanasayfa);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_para);
@@ -221,5 +235,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_para;
         private System.Windows.Forms.Button cikisanasayfa;
+        private System.Windows.Forms.Button satin_al_piyasa;
     }
 }

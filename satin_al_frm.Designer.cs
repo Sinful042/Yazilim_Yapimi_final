@@ -35,7 +35,7 @@
             this.admin_label = new System.Windows.Forms.Label();
             this.satın_al_btn = new System.Windows.Forms.Button();
             this.cikis_btn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.birim = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_para = new System.Windows.Forms.Label();
@@ -120,12 +120,12 @@
             this.cikis_btn.UseVisualStyleBackColor = false;
             this.cikis_btn.Click += new System.EventHandler(this.cikis_btn_Click);
             // 
-            // textBox1
+            // birim
             // 
-            this.textBox1.Location = new System.Drawing.Point(288, 356);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(212, 20);
-            this.textBox1.TabIndex = 21;
+            this.birim.Location = new System.Drawing.Point(288, 356);
+            this.birim.Name = "birim";
+            this.birim.Size = new System.Drawing.Size(212, 20);
+            this.birim.TabIndex = 21;
             // 
             // label2
             // 
@@ -203,7 +203,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_para);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.birim);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
@@ -230,7 +230,7 @@
         private System.Windows.Forms.Label admin_label;
         private System.Windows.Forms.Button satın_al_btn;
         private System.Windows.Forms.Button cikis_btn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox birim;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_para;

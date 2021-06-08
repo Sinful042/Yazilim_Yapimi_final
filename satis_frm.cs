@@ -20,7 +20,7 @@ namespace Proje_Ödevi
         int olan_miktar;
         int birim_fiyat;
         string birim;
-        string UrunTuru;
+        
         public satis_frm()
         {
             InitializeComponent();

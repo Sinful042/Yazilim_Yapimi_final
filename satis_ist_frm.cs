@@ -19,7 +19,10 @@ namespace Proje_Ödevi
         string durum;
         string filitre;
         int total_miktar,miktar;
-        
+        int total_para, harcanan_para;
+        int muhasebe_ucret,olan_miktar;
+        string urun_birim;
+        int urun_miktar;
         public satis_ist_frm()
         {
             InitializeComponent();
@@ -104,9 +107,12 @@ namespace Proje_Ödevi
                     Kullanici_adi = oku["KullaniciAdi"].ToString();
                     Urunid = oku["UrunAdi"].ToString();
                     Fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
+                    urun_birim = oku["UrunBirim"].ToString();
+                    urun_miktar = Int32.Parse(oku["sUrunMiktar"].ToString());
                     durum = "Onaylandi";
                     baglanti.Close();
                     durum_güncelle(Kullanici_adi,Urunid,Fiyat,durum);
+                    Alis_istek_kntrl(Kullanici_adi,Urunid,Fiyat,urun_miktar,urun_birim);
                     MessageBox.Show("Onaylama başarılı", "Tamam");
                     break;
                 }
@@ -183,5 +189,125 @@ namespace Proje_Ödevi
             komut_2.ExecuteNonQuery();
             baglanti.Close();
         }
+
+        private void Alis_istek_kntrl(string satici,string urun,int fiyat,int satilan_miktar,string birim)
+        {
+            baglanti.Open();
+            OleDbCommand komut = new OleDbCommand();
+            komut.Connection = baglanti;
+            komut.CommandText = ("Select *from Alis where UrunAdi = '" + urun + "'  AND NOT KullaniciAdi='" + satici + "'ORDER BY istekFiyat ASC");
+            OleDbDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["AlisDurum"].ToString() == "Bekleniyor")
+                {
+                    if (Int32.Parse(oku["istekMiktar"].ToString())<=satilan_miktar)
+                    {
+                        satilan_miktar = Int32.Parse(oku["istekMiktar"].ToString());
+                        istek_alim(satici, oku["KullaniciAdi"].ToString(), urun, fiyat,satilan_miktar, birim);
+                        
+                    }
+                }
+            }
+            baglanti.Close();
+
+        }
+        private void istek_alim(string satici,string alici,string urun,int fiyat,int miktar,string birim)
+        {
+            OleDbCommand sorgu = new OleDbCommand("select *from Kullanici where KullaniciAdi ='"+alici+"'", baglanti);
+            OleDbDataReader oku = sorgu.ExecuteReader();
+            while (oku.Read())
+            {
+                if ((fiyat*miktar)<=Int32.Parse(oku["Cuzdan"].ToString()))
+                {
+                    //Satıcıya parası gönderiliyor.
+                    Para_gonder(satici,(miktar*fiyat));
+                    //muhasebe ücreti hesaplanıyor
+                    muhasebe_ucret = (fiyat * miktar) / 100;
+                    //muhasebe ücreti gönderiliyor.
+                    Para_gonder("Muhasebe", muhasebe_ucret);
+                    //alıcıdan toplam harcanan para hesaplanıyor.
+                    harcanan_para = (fiyat*miktar) + muhasebe_ucret;
+                    //Alıcının parası güncelleniyor.
+                    Para_cikar(alici, harcanan_para);
+                    //satılan ürün satış listesinden çıkarılıyor.
+                    satistan_cikar(urun,satici, miktar,fiyat);
+                    //alınan ürün alıcının hesabına aktarılıyor.
+                    urun_ekle(alici, miktar.ToString(), urun,birim);
+                }
+            }
+
+
+        }
+        private void Para_gonder(string satici_Kullanici_adi, int gelen_para)
+        {
+
+
+            OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
+            OleDbDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["KullaniciAdi"].ToString() == satici_Kullanici_adi)
+                {
+
+                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    break;
+                }
+
+            }
+            gelen_para += total_para;
+            OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + gelen_para.ToString() + "' where KullaniciAdi = '" + satici_Kullanici_adi + "'", baglanti);
+            komut_2.ExecuteNonQuery();
+
+
+
+        }
+        private void Para_cikar(string Kullanici_adi, int giden_para)
+        {
+
+            OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
+            OleDbDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["KullaniciAdi"].ToString() == Kullanici_adi)
+                {
+
+                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    break;
+                }
+
+            }
+            total_para -= giden_para;
+            //yenipara = total_para;
+            OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + total_para.ToString() + "' where KullaniciAdi = '" + Kullanici_adi + "'", baglanti);
+            komut_2.ExecuteNonQuery();
+            
+        }
+        private void urun_ekle(string Kullanici_adi, string alinan_miktar, string urunAd, string Birim)
+        {
+
+            OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
+            komut.ExecuteNonQuery();
+        }
+        private void satistan_cikar(string Urunadi, string Kullanici_Adi, int alinan_miktar, int alinan_fiyat)
+        {
+
+            OleDbCommand sorgu = new OleDbCommand("select *from Satis where UrunAdi= '" + Urunadi + "'", baglanti);
+            OleDbDataReader oku = sorgu.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["KullaniciAdi"].ToString() == Kullanici_Adi)
+                {
+                    olan_miktar = Convert.ToInt32(oku["SUrunMiktar"].ToString());
+                    break;
+                }
+            }
+            olan_miktar -= alinan_miktar;
+            OleDbCommand komut = new OleDbCommand("update Satis set sUrunMiktar='" + olan_miktar.ToString() + "' where KullaniciAdi='" + Kullanici_Adi + "' and UrunAdi='" + Urunadi + "' and UrunFiyat ='" + alinan_fiyat.ToString() + "'", baglanti);
+            komut.ExecuteNonQuery();
+
+        }
+
+
     }
 }

@@ -22,6 +22,7 @@ namespace Proje_Ödevi
         string filitre;
         bool alim_gerceklesti;
         int gonderilen_para;
+        int muhasebe_ucret;
        
 
 
@@ -100,10 +101,6 @@ namespace Proje_Ödevi
             dataGridView1.DataSource = tablo;
             baglanti.Close();
         }
-
-
-
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -159,50 +156,73 @@ namespace Proje_Ödevi
 
         private void satin_al_piyasa_Click(object sender, EventArgs e)
         {
-            fiyatbelirle fiyatbelirle = new fiyatbelirle();
-            fiyatbelirle.Show();
+            if (birim.Text=="")
+            {
+                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Tamam");
+            }
+            else
+            {
+                fiyatbelirle fiyatbelirle = new fiyatbelirle();
+                istek_ürün = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
+                fiyatbelirle.istek_birim = Int32.Parse(birim.Text);
+                fiyatbelirle.alici_kullanici_adi = alici_kullanici_adi;
+                fiyatbelirle.istek_ürün = istek_ürün;
+                fiyatbelirle.alici_para = Int32.Parse(para);
+                fiyatbelirle.Show();
+                this.Hide();
+            }
             
+
         }
 
         private void lbl_para_Click(object sender, EventArgs e)
         {
 
         }
+        
 
         private void satın_al_btn_Click(object sender, EventArgs e)
         {
+            if (birim.Text == "")
+            {
+                MessageBox.Show("Lütfen kaç birim almak istediğinizi belirtiniz!", "Tamam");
+            }
+            else
+            {
+                alim_gerceklesti = false;
+                harcanan_para = 0;
+                alinan_miktar = 0;
+                gonderilen_para = 0;
+                istek_miktar = Convert.ToInt32(birim.Text);
+                istek_ürün = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
+                baglanti.Open();
+                OleDbCommand komut = new OleDbCommand();
+                komut.Connection = baglanti;
+                komut.CommandText = ("Select *from Satis where UrunAdi = '" + istek_ürün + "'  AND NOT KullaniciAdi='" + alici_kullanici_adi + "'ORDER BY UrunFiyat ASC");
+                OleDbDataReader oku = komut.ExecuteReader();
+                while (oku.Read())
+                {
+                    if (istek_miktar <= Convert.ToInt32(oku["sUrunMiktar"].ToString()) && Convert.ToInt32(oku["sUrunMiktar"].ToString()) > 0)
+                    {
+                        alinan_fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
+                        gonderilen_para = istek_miktar * alinan_fiyat;
+                        harcanan_para += gonderilen_para;
+                        muhasebe_ucret = harcanan_para / 100;
+                        harcanan_para += muhasebe_ucret;
+                        satici_kullanici_adi = oku["KullaniciAdi"].ToString();
+                        urun_birim = oku["UrunBirim"].ToString();
 
-            alim_gerceklesti = false;
-            harcanan_para = 0;
-            alinan_miktar = 0;
-            gonderilen_para = 0;
-            istek_miktar = Convert.ToInt32(textBox1.Text);
-            istek_ürün = dataGridView1.CurrentRow.Cells["UrunAdi"].Value.ToString();
-            baglanti.Open();
-            OleDbCommand komut = new OleDbCommand();
-            komut.Connection = baglanti;
-            komut.CommandText = ("Select *from Satis where UrunAdi = '" + istek_ürün + "'  AND NOT KullaniciAdi='"+alici_kullanici_adi+"'ORDER BY UrunFiyat ASC");
-            OleDbDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
-             {
-                        if (istek_miktar <= Convert.ToInt32(oku["sUrunMiktar"].ToString()) && Convert.ToInt32(oku["sUrunMiktar"].ToString()) > 0)
-                        {
-                            alinan_fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
-                            gonderilen_para = istek_miktar * alinan_fiyat;
-                            harcanan_para += gonderilen_para;
-                            satici_kullanici_adi = oku["KullaniciAdi"].ToString();
-                            urun_birim = oku["UrunBirim"].ToString();
-
-                        if (Convert.ToInt32(para)>=harcanan_para)
+                        if (Convert.ToInt32(para) >= harcanan_para)
                         {
                             Para_gonder(satici_kullanici_adi, gonderilen_para);
+                            Para_gonder("Muhasebe",muhasebe_ucret);
                             satistan_cikar(istek_ürün, satici_kullanici_adi, istek_miktar, alinan_fiyat);
                             istek_miktar += alinan_miktar;
                             alim_gerceklesti = true;
                             MessageBox.Show("Satın Alım Gerçekleştirilmiştir", "Tamam");
-                       
-                        textBox1.Clear();
-                        break;
+
+                            birim.Clear();
+                            break;
 
                         }
                         else
@@ -210,17 +230,17 @@ namespace Proje_Ödevi
                             MessageBox.Show("Bakiyeniz Yeterli değildir!", "Tamam");
                             break;
                         }
-                            
-                        
-                            
-                        }
-                        else if (istek_miktar > Convert.ToInt32(oku["sUrunMiktar"].ToString()) && Convert.ToInt32(oku["sUrunMiktar"].ToString()) >0)
-                        {
-                            alinan_miktar = Convert.ToInt32(oku["sUrunMiktar"].ToString());
-                            satici_kullanici_adi = oku["KullaniciAdi"].ToString();
-                            alinan_fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
-                            gonderilen_para = alinan_miktar * alinan_fiyat;
-                            harcanan_para += gonderilen_para;
+
+
+
+                    }
+                    else if (istek_miktar > Convert.ToInt32(oku["sUrunMiktar"].ToString()) && Convert.ToInt32(oku["sUrunMiktar"].ToString()) > 0)
+                    {
+                        alinan_miktar = Convert.ToInt32(oku["sUrunMiktar"].ToString());
+                        satici_kullanici_adi = oku["KullaniciAdi"].ToString();
+                        alinan_fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
+                        gonderilen_para = alinan_miktar * alinan_fiyat;
+                        harcanan_para += gonderilen_para;
                         if (Convert.ToInt32(para) >= harcanan_para)
                         {
                             urun_birim = oku["UrunBirim"].ToString();
@@ -228,31 +248,34 @@ namespace Proje_Ödevi
                             satistan_cikar(istek_ürün, satici_kullanici_adi, alinan_miktar, alinan_fiyat);
 
                             istek_miktar -= alinan_miktar;
-                            
+
                         }
                         else
                         {
                             MessageBox.Show("Bakiyeniz Yeterli değildir!", "Tamam");
                             break;
                         }
-                        
-                            
-                            
-                            
 
 
-                        }
 
 
-             }
-                if (alim_gerceklesti)
-                {
-                    urun_ekle(alici_kullanici_adi,istek_miktar.ToString(),istek_ürün,urun_birim);
-                    Para_cikar(alici_kullanici_adi, harcanan_para);
-                
+
+
+                    }
+
 
                 }
-                 baglanti.Close();
+                if (alim_gerceklesti)
+                {
+                    urun_ekle(alici_kullanici_adi, istek_miktar.ToString(), istek_ürün, urun_birim);
+                    Para_cikar(alici_kullanici_adi, harcanan_para);
+
+
+                }
+                baglanti.Close();
+            }
+            
+
 
 
         }
@@ -313,7 +336,7 @@ namespace Proje_Ödevi
             
 
         }
-        private void satistan_cikar(string Urunadi,string Kullanici_Adi,int alinan_miktar,int alinan_fiyat)
+        private void  satistan_cikar(string Urunadi,string Kullanici_Adi,int alinan_miktar,int alinan_fiyat)
         {
             
             OleDbCommand sorgu = new OleDbCommand("select *from Satis where UrunAdi= '"+Urunadi+"'",baglanti);

@@ -99,6 +99,7 @@
             this.urunlersatinal.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.urunlersatinal.Size = new System.Drawing.Size(742, 325);
             this.urunlersatinal.TabIndex = 19;
+            this.urunlersatinal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.urunlersatinal_CellContentClick);
             // 
             // filtre_cmbx
             // 

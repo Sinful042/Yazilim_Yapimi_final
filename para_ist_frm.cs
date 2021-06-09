@@ -8,17 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Xml;
 
 namespace Proje_Ödevi
 {
     public partial class para_ist_frm : Form
     {
         private string para;
-        private int şuanki_para;
-        private int total_para;
-        private int istek_para;
+        private double şuanki_para;
+        private double total_para;
+        private double istek_para;
         private string durum;
         private string filitre;
+        private double tl;
+        
         
         
         public para_ist_frm()
@@ -127,7 +130,7 @@ namespace Proje_Ödevi
         }
 
 
-        public void para_güncelle(int para)
+        public void para_güncelle(double para)
         {
             baglanti.Open();
             OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + para.ToString() + "' where KullaniciAdi = '" + dataGridView1.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
@@ -155,7 +158,8 @@ namespace Proje_Ödevi
             while (oku.Read())
             {
                 para = oku["İstekPekle"].ToString();
-                istek_para = Int32.Parse(para);
+                tl = kur_hesabı(double.Parse(para),oku["KullaniciPekle"].ToString());
+                istek_para = tl;
             }
             baglanti.Close();
 
@@ -165,7 +169,7 @@ namespace Proje_Ödevi
             while (oku_2.Read())
             {
                 para = oku_2["Cuzdan"].ToString();
-                şuanki_para = Int32.Parse(para);
+                şuanki_para = double.Parse(para);
                 total_para = istek_para + şuanki_para;
             }
             baglanti.Close();
@@ -202,6 +206,47 @@ namespace Proje_Ödevi
         private void cikisanasayfa_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        private double kur_hesabı(double para,string kullanici)
+        {
+            string kurlar = "https://www.tcmb.gov.tr/kurlar/today.xml";
+            var xml = new XmlDocument();
+            xml.Load(kurlar);
+            OleDbCommand komut_2 = new OleDbCommand("Select *from Paraekle where KullaniciPekle= '" + kullanici + "' and İstekPekle= '"+para.ToString()+"'", baglanti);
+            OleDbDataReader oku_2 = komut_2.ExecuteReader();
+            while (oku_2.Read())
+            {
+                if (oku_2["ParaTip"].ToString() == "TRY")
+                {
+                    tl = para;
+
+                }
+                else if (oku_2["ParaTip"].ToString() == "EUR")
+                {
+                    //euroya cevir
+                    string euro = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='EUR']/BanknoteSelling").InnerXml;
+                    tl = para * double.Parse(euro);
+                   
+                }
+                else if (oku_2["ParaTip"].ToString() == "USD")
+                {
+                    //dolara çevir
+                    string usd = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='USD']/BanknoteSelling").InnerXml;
+                    tl = para * double.Parse(usd);
+                }
+                else
+                {
+                    //rubleye çevir
+                    string rub = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='RUB']/BanknoteSelling").InnerXml;
+                    tl = para * double.Parse(rub);
+                    
+
+                }
+            }
+
+
+            return tl;
+
         }
     }
 }

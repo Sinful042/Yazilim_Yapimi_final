@@ -181,6 +181,11 @@ namespace Proje_Ödevi
             }
         }
 
+        private void urunlersatinal_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void birim_Leave(object sender, EventArgs e)
         {
             if (birim.Text == "")

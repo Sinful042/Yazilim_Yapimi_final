@@ -14,6 +14,7 @@ namespace Proje_Ödevi
     public partial class para_ekle_frm : Form
     {
         public string kullanici_adi;
+        string para_tipi;
         public para_ekle_frm()
         {
             InitializeComponent();
@@ -21,25 +22,28 @@ namespace Proje_Ödevi
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void ekle_btn_Click(object sender, EventArgs e)
         {
-            
-                if (istek_para.Text == "")
-                {
-                    MessageBox.Show("Lütfen miktar Giriniz.", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
-                }
-
-            
+            if (istek_para.Text== "Lütfen Miktarı giriniz")
+            {
+                MessageBox.Show("Lütfen miktar Giriniz.", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (paratip.SelectedItem==null)
+            {
+                MessageBox.Show("Lütfen para tipini şeçiniz", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
-                Para_ekle(istek_para.Text);
+                para_tipi = paratip.SelectedItem.ToString();
+                Para_ekle(istek_para.Text,para_tipi);
             }
+
+
         }
 
 
-        public void Para_ekle(string miktar)
+        private void Para_ekle(string miktar,string para_tipi)
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("insert into Paraekle(KullaniciPekle,İstekPekle) values('"+kullanici_adi+"','"+miktar+"')", baglanti);
+            OleDbCommand komut = new OleDbCommand("insert into Paraekle(KullaniciPekle,İstekPekle,ParaTip) values('"+kullanici_adi+"','"+miktar+ "','" +para_tipi + "')", baglanti);
             komut.ExecuteNonQuery();
             baglanti.Close();
             MessageBox.Show("Para İsteme Alınmıştır","Tamam");
@@ -72,6 +76,16 @@ namespace Proje_Ödevi
                 istek_para.Text = "Lütfen Miktarı giriniz";
                 istek_para.ForeColor = Color.Silver;
             }
+        }
+
+        private void para_ekle_frm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void paratip_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

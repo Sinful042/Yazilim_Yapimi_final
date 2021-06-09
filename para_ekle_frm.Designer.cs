@@ -69,7 +69,7 @@
             this.ekle_btn.Name = "ekle_btn";
             this.ekle_btn.Size = new System.Drawing.Size(117, 37);
             this.ekle_btn.TabIndex = 4;
-            this.ekle_btn.Text = "Para Ekle";
+            this.ekle_btn.Text = "Ekle";
             this.ekle_btn.UseVisualStyleBackColor = true;
             this.ekle_btn.Click += new System.EventHandler(this.ekle_btn_Click);
             // 
@@ -93,11 +93,17 @@
             // 
             this.paratip.ForeColor = System.Drawing.Color.Silver;
             this.paratip.FormattingEnabled = true;
+            this.paratip.Items.AddRange(new object[] {
+            "TL",
+            "EUR",
+            "USD",
+            "RUB"});
             this.paratip.Location = new System.Drawing.Point(65, 149);
             this.paratip.Name = "paratip";
             this.paratip.Size = new System.Drawing.Size(167, 21);
             this.paratip.TabIndex = 8;
             this.paratip.Text = "Para Tipini Seçiniz";
+            this.paratip.SelectedIndexChanged += new System.EventHandler(this.paratip_SelectedIndexChanged);
             // 
             // istekparatip_lbl
             // 
@@ -128,7 +134,7 @@
             this.Name = "para_ekle_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para Ekle";
-          
+            this.Load += new System.EventHandler(this.para_ekle_frm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

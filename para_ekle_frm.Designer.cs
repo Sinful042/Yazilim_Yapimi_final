@@ -103,7 +103,9 @@
             this.paratip.Size = new System.Drawing.Size(167, 21);
             this.paratip.TabIndex = 8;
             this.paratip.Text = "Para Tipini Seçiniz";
-            this.paratip.SelectedIndexChanged += new System.EventHandler(this.paratip_SelectedIndexChanged);
+            
+            this.paratip.Enter += new System.EventHandler(this.paratip_Enter);
+            this.paratip.Leave += new System.EventHandler(this.paratip_Leave);
             // 
             // istekparatip_lbl
             // 
@@ -134,7 +136,7 @@
             this.Name = "para_ekle_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para Ekle";
-            this.Load += new System.EventHandler(this.para_ekle_frm_Load);
+         
             this.ResumeLayout(false);
             this.PerformLayout();
 

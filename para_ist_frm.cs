@@ -21,9 +21,7 @@ namespace Proje_Ödevi
         private string durum;
         private string filitre;
         private double tl;
-        
-        
-        
+
         public para_ist_frm()
         {
             InitializeComponent();
@@ -50,10 +48,10 @@ namespace Proje_Ödevi
                 baglanti.Open();
                 OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Paraekle", baglanti);
                 liste.Fill(tablo);
-                dataGridView1.DataSource = tablo;
-                dataGridView1.ReadOnly = true;
-                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
-                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Red;
+                paralisteleme.DataSource = tablo;
+                paralisteleme.ReadOnly = true;
+                paralisteleme.DefaultCellStyle.SelectionBackColor = Color.White;
+                paralisteleme.DefaultCellStyle.SelectionForeColor = Color.Red;
                 baglanti.Close();
 
             
@@ -63,14 +61,14 @@ namespace Proje_Ödevi
             baglanti.Open();
             OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Paraekle where Durum = '" + durum + "'", baglanti);
             liste.Fill(tablo);
-            dataGridView1.DataSource = tablo;
+            paralisteleme.DataSource = tablo;
             baglanti.Close();
         }
 
         private void onay_btn_Click(object sender, EventArgs e)
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + dataGridView1.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + paralisteleme.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {
@@ -91,17 +89,18 @@ namespace Proje_Ödevi
                     baglanti.Close();
                     Para_ekle();
                     break;
+
                 }
             }
-            
 
-
+            tablo.Clear();
+            Listeleme();
 
         }
         private void onaylama_btn_Click(object sender, EventArgs e)
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + dataGridView1.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + paralisteleme.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {
@@ -110,30 +109,36 @@ namespace Proje_Ödevi
                     MessageBox.Show("Para isteği daha önce onaylamış", "Tamam");
                     baglanti.Close();
                     break;
+                    
                 }
                 else if (oku["Durum"].ToString() == "Onaylanmadi")
                 {
                     MessageBox.Show("Para isteği daha önce reddedilmiş", "Tamam");
                     baglanti.Close();
                     break;
+                    
                 }
                 else
                 {
                     baglanti.Close();
                     durum = "Onaylanmadi";
-                    string istek = dataGridView1.CurrentRow.Cells["İstekPekle"].Value.ToString();
+                    string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
                     Durum_güncelle(durum,istek);
                     MessageBox.Show("Reddetme Başarılı", "Tamam");
                     break;
+                    
                 }
             }
+            tablo.Clear();
+            Listeleme();
+
         }
 
 
         public void para_güncelle(double para)
         {
             baglanti.Open();
-            OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + para.ToString() + "' where KullaniciAdi = '" + dataGridView1.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + para.ToString() + "' where KullaniciAdi = '" + paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
             komut_2.ExecuteNonQuery();
             baglanti.Close();
             MessageBox.Show("Onaylama Başarılı", "Tamam");
@@ -152,7 +157,7 @@ namespace Proje_Ödevi
         public void Para_ekle()
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("select *from Paraekle where İstekPekle= '" + dataGridView1.CurrentRow.Cells["İstekPekle"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut = new OleDbCommand("select *from Paraekle where İstekPekle= '" + paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
 
             while (oku.Read())
@@ -164,7 +169,7 @@ namespace Proje_Ödevi
             baglanti.Close();
 
             baglanti.Open();
-            OleDbCommand komut_2 = new OleDbCommand("Select *from Kullanici where KullaniciAdi= '" + dataGridView1.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut_2 = new OleDbCommand("Select *from Kullanici where KullaniciAdi= '" + paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku_2 = komut_2.ExecuteReader();
             while (oku_2.Read())
             {
@@ -175,7 +180,7 @@ namespace Proje_Ödevi
             baglanti.Close();
             para_güncelle(total_para);
             durum = "Onaylandı";
-            string istek = dataGridView1.CurrentRow.Cells["İstekPekle"].Value.ToString();
+            string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
             Durum_güncelle(durum,istek);
 
 
@@ -183,13 +188,13 @@ namespace Proje_Ödevi
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex==0)
+            if (istekler.SelectedIndex==0)
             {
                 filitre = "Onaylandı";
                 tablo.Clear();
                 Filitre_Liste(filitre);
             }
-            else if (comboBox1.SelectedIndex==1)
+            else if (istekler.SelectedIndex==1)
             {
                 tablo.Clear();
                 filitre= "Onaylanmadi";
@@ -215,8 +220,9 @@ namespace Proje_Ödevi
             OleDbCommand komut_2 = new OleDbCommand("Select *from Paraekle where KullaniciPekle= '" + kullanici + "' and İstekPekle= '"+para.ToString()+"'", baglanti);
             OleDbDataReader oku_2 = komut_2.ExecuteReader();
             while (oku_2.Read())
-            {
-                if (oku_2["ParaTip"].ToString() == "TRY")
+
+            {   //Tl'ye cevir
+                if (oku_2["ParaTip"].ToString() == "TL")
                 {
                     tl = para;
 
@@ -225,8 +231,10 @@ namespace Proje_Ödevi
                 {
                     //euroya cevir
                     string euro = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='EUR']/BanknoteSelling").InnerXml;
-                    tl = para * double.Parse(euro);
-                   
+                     tl = para * double.Parse(euro);
+
+
+
                 }
                 else if (oku_2["ParaTip"].ToString() == "USD")
                 {
@@ -247,6 +255,16 @@ namespace Proje_Ödevi
 
             return tl;
 
+        }
+
+        private void istekler_Leave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void istekler_Enter(object sender, EventArgs e)
+        {
+            
         }
     }
 }

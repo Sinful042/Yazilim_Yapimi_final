@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(para_ist_frm));
             this.admin_label = new System.Windows.Forms.Label();
             this.cikis_btn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.istekler = new System.Windows.Forms.ComboBox();
             this.onaylama_btn = new System.Windows.Forms.Button();
             this.onay_btn = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.paralisteleme = new System.Windows.Forms.DataGridView();
+            this.filtre_lbl = new System.Windows.Forms.Label();
             this.cikisanasayfa = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paralisteleme)).BeginInit();
             this.SuspendLayout();
             // 
             // admin_label
@@ -63,20 +63,22 @@
             this.cikis_btn.UseVisualStyleBackColor = false;
             this.cikis_btn.Click += new System.EventHandler(this.cikis_btn_Click);
             // 
-            // comboBox1
+            // istekler
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.istekler.BackColor = System.Drawing.Color.Silver;
+            this.istekler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.istekler.FormattingEnabled = true;
+            this.istekler.Items.AddRange(new object[] {
             "Onaylanan Kullanıclar",
             "Onaylanmayan Kullanıcılar",
             "Onay Bekleyen Kullanıcılar"});
-            this.comboBox1.Location = new System.Drawing.Point(583, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(142, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.istekler.Location = new System.Drawing.Point(583, 20);
+            this.istekler.Name = "istekler";
+            this.istekler.Size = new System.Drawing.Size(142, 21);
+            this.istekler.TabIndex = 4;
+            this.istekler.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.istekler.Enter += new System.EventHandler(this.istekler_Enter);
+            this.istekler.Leave += new System.EventHandler(this.istekler_Leave);
             // 
             // onaylama_btn
             // 
@@ -102,26 +104,26 @@
             this.onay_btn.UseVisualStyleBackColor = false;
             this.onay_btn.Click += new System.EventHandler(this.onay_btn_Click);
             // 
-            // dataGridView1
+            // paralisteleme
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightGray;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 66);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(715, 226);
-            this.dataGridView1.TabIndex = 7;
+            this.paralisteleme.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.paralisteleme.BackgroundColor = System.Drawing.Color.LightGray;
+            this.paralisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paralisteleme.Location = new System.Drawing.Point(18, 66);
+            this.paralisteleme.Name = "paralisteleme";
+            this.paralisteleme.Size = new System.Drawing.Size(715, 226);
+            this.paralisteleme.TabIndex = 7;
             // 
-            // label1
+            // filtre_lbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(525, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 22);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Filtre:";
+            this.filtre_lbl.AutoSize = true;
+            this.filtre_lbl.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.filtre_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.filtre_lbl.Location = new System.Drawing.Point(525, 19);
+            this.filtre_lbl.Name = "filtre_lbl";
+            this.filtre_lbl.Size = new System.Drawing.Size(55, 22);
+            this.filtre_lbl.TabIndex = 8;
+            this.filtre_lbl.Text = "Filtre:";
             // 
             // cikisanasayfa
             // 
@@ -147,11 +149,11 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(758, 402);
             this.Controls.Add(this.cikisanasayfa);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.filtre_lbl);
+            this.Controls.Add(this.paralisteleme);
             this.Controls.Add(this.onay_btn);
             this.Controls.Add(this.onaylama_btn);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.istekler);
             this.Controls.Add(this.cikis_btn);
             this.Controls.Add(this.admin_label);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -160,7 +162,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para İstekleri";
             this.Load += new System.EventHandler(this.admin_frm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paralisteleme)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,11 +172,11 @@
 
         private System.Windows.Forms.Label admin_label;
         private System.Windows.Forms.Button cikis_btn;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox istekler;
         private System.Windows.Forms.Button onaylama_btn;
         private System.Windows.Forms.Button onay_btn;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView paralisteleme;
+        private System.Windows.Forms.Label filtre_lbl;
         private System.Windows.Forms.Button cikisanasayfa;
     }
 }

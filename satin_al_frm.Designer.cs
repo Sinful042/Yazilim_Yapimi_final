@@ -99,21 +99,12 @@
             this.urunlersatinal.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.urunlersatinal.Size = new System.Drawing.Size(742, 325);
             this.urunlersatinal.TabIndex = 19;
-            this.urunlersatinal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.urunlersatinal_CellContentClick);
             // 
             // filtre_cmbx
             // 
             this.filtre_cmbx.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.filtre_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.filtre_cmbx.FormattingEnabled = true;
-            this.filtre_cmbx.Items.AddRange(new object[] {
-            "Yiyecek",
-            "Giysi",
-            "Hammadde",
-            "Kırtasiye",
-            "Elektronik",
-            "Aksesuar",
-            "Mutfak"});
             this.filtre_cmbx.Location = new System.Drawing.Point(624, 26);
             this.filtre_cmbx.Name = "filtre_cmbx";
             this.filtre_cmbx.Size = new System.Drawing.Size(142, 21);

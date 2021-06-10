@@ -19,7 +19,6 @@ namespace Proje_Ödevi
         string istek_ürün,urun_birim;
         int istek_miktar, alinan_fiyat;
         int olan_miktar,alinan_miktar;
-        string filitre;
         bool alim_gerceklesti;
         int gonderilen_para;
         int muhasebe_ucret;
@@ -56,6 +55,7 @@ namespace Proje_Ödevi
             
             Listeleme();
             paraguncelle(para);
+            Uruntur();
            
         }
         private void paraguncelle(string para)
@@ -89,67 +89,40 @@ namespace Proje_Ödevi
             Application.Exit();
         }
 
-        private void filitre_liste(string UrunTuru)
+        private void filitre_listeleme(string uruntur)
         {
+            tablo.Clear();
             baglanti.Open();
-            OleDbDataAdapter liste = new OleDbDataAdapter("select  UrunAdi,UrunBirim,UrunTuru from Urunler where UrunTuru = '" + UrunTuru + "'", baglanti);
-            liste.Fill(tablo);
+            OleDbDataAdapter liste1 = new OleDbDataAdapter("select UrunAdi,UrunBirim,UrunTuru from Urunler where UrunTuru= '" + uruntur + "'", baglanti);
+            liste1.Fill(tablo);
             urunlersatinal.DataSource = tablo;
+            urunlersatinal.DefaultCellStyle.SelectionBackColor = Color.White;
+            urunlersatinal.DefaultCellStyle.SelectionForeColor = Color.Green;
             baglanti.Close();
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (filtre_cmbx.SelectedIndex == 0)
+            for (int i = 0; i < filtre_cmbx.Items.Count; i++)
             {
-                tablo.Clear();
-                filitre = "Yiyecek";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 1)
-            {
-                tablo.Clear();
-                filitre = "Giysi";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 2)
-            {
-                tablo.Clear();
-                filitre = "Hammadde";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 3)
-            {
-                tablo.Clear();
-                filitre = "Kırtasiye";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 4)
-            {
-                tablo.Clear();
-                filitre = "Elektronik";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 5)
-            {
-                tablo.Clear();
-                filitre = "Aksesuar";
-                filitre_liste(filitre);
-            }
-            else if (filtre_cmbx.SelectedIndex == 6)
-            {
-                tablo.Clear();
-                filitre = "Mutfak";
-                filitre_liste(filitre);
-            }
-
-            else
-            {
-                tablo.Clear();
-                filitre = "Bekleniyor";
-                filitre_liste(filitre);
+                if (filtre_cmbx.SelectedIndex == i)
+                {
+                    filitre_listeleme(filtre_cmbx.SelectedItem.ToString());
+                }
             }
         }
 
+        private void Uruntur()
+        {
+            filtre_cmbx.Items.Clear();
+            baglanti.Open();
+            OleDbCommand sorgu = new OleDbCommand("select *from UrunTur", baglanti);
+            OleDbDataReader oku = sorgu.ExecuteReader();
+            while (oku.Read())
+            {
+                filtre_cmbx.Items.Add(oku["UrunTuru"].ToString());
+            }
+            baglanti.Close();
+        }
         private void satin_al_piyasa_Click(object sender, EventArgs e)
         {
             if (birim.Text== "Lütfen birim giriniz")
@@ -181,10 +154,7 @@ namespace Proje_Ödevi
             }
         }
 
-        private void urunlersatinal_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void birim_Leave(object sender, EventArgs e)
         {
@@ -275,9 +245,6 @@ namespace Proje_Ödevi
 
 
 
-
-
-
                     }
 
 
@@ -292,8 +259,6 @@ namespace Proje_Ödevi
                 baglanti.Close();
             }
             
-
-
 
         }
         

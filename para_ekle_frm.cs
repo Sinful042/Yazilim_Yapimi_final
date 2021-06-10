@@ -78,14 +78,22 @@ namespace Proje_Ödevi
             }
         }
 
-        private void para_ekle_frm_Load(object sender, EventArgs e)
+        private void paratip_Enter(object sender, EventArgs e)
         {
-
+            if (paratip.Text== "Para Tipini Seçiniz")
+            {
+                paratip.Text = "";
+                paratip.ForeColor = Color.Black;
+            }
         }
 
-        private void paratip_SelectedIndexChanged(object sender, EventArgs e)
+        private void paratip_Leave(object sender, EventArgs e)
         {
-            
+            if (paratip.Text == "")
+            {
+                paratip.Text = "Para Tipini Seçiniz";
+                paratip.ForeColor = Color.Silver;
+            }
         }
     }
 }

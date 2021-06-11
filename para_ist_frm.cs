@@ -163,7 +163,7 @@ namespace Proje_Ödevi
             while (oku.Read())
             {
                 para = oku["İstekPekle"].ToString();
-                tl = kur_hesabı(double.Parse(para),oku["KullaniciPekle"].ToString());
+                tl = kur_hesabı(Int32.Parse(para),oku["KullaniciPekle"].ToString());
                 istek_para = tl;
             }
             baglanti.Close();
@@ -212,26 +212,29 @@ namespace Proje_Ödevi
         {
             Application.Exit();
         }
-        private double kur_hesabı(double para,string kullanici)
+        private double kur_hesabı(int  istek_para,string kullanici)
         {
             string kurlar = "https://www.tcmb.gov.tr/kurlar/today.xml";
             var xml = new XmlDocument();
             xml.Load(kurlar);
-            OleDbCommand komut_2 = new OleDbCommand("Select *from Paraekle where KullaniciPekle= '" + kullanici + "' and İstekPekle= '"+para.ToString()+"'", baglanti);
+            OleDbCommand komut_2 = new OleDbCommand("Select *from Paraekle where KullaniciPekle= '" + kullanici + "' and İstekPekle= '"+istek_para.ToString()+"'", baglanti);
             OleDbDataReader oku_2 = komut_2.ExecuteReader();
             while (oku_2.Read())
 
             {   //Tl'ye cevir
                 if (oku_2["ParaTip"].ToString() == "TL")
                 {
-                    tl = para;
+                    tl = istek_para;
 
                 }
                 else if (oku_2["ParaTip"].ToString() == "EUR")
                 {
                     //euroya cevir
-                    string euro = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='EUR']/BanknoteSelling").InnerXml;
-                     tl = para * double.Parse(euro);
+                    string euro_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='EUR']/BanknoteSelling").InnerXml;
+                    double euro = Convert.ToDouble(euro_kur.Replace(".", ","));
+                    tl = istek_para * euro;
+                    tl = Math.Round(tl, 2);
+                    
 
 
 
@@ -239,15 +242,19 @@ namespace Proje_Ödevi
                 else if (oku_2["ParaTip"].ToString() == "USD")
                 {
                     //dolara çevir
-                    string usd = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='USD']/BanknoteSelling").InnerXml;
-                    tl = para * double.Parse(usd);
+                    string usd_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='USD']/BanknoteSelling").InnerXml;
+                    double usd = Convert.ToDouble(usd_kur.Replace(".", ","));
+                    tl = istek_para * usd;
+                    tl = Math.Round(tl, 2);
                 }
+                
                 else
                 {
                     //rubleye çevir
-                    string rub = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='RUB']/BanknoteSelling").InnerXml;
-                    tl = para * double.Parse(rub);
-                    
+                    string rub_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='RUB']/BanknoteSelling").InnerXml;
+                    double rub = Convert.ToDouble(rub_kur.Replace(".",","));
+                    tl = istek_para * rub;
+                    tl = Math.Round(tl, 2);
 
                 }
             }

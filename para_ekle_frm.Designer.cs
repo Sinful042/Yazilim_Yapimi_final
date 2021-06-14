@@ -94,7 +94,7 @@
             this.paratip.ForeColor = System.Drawing.Color.Silver;
             this.paratip.FormattingEnabled = true;
             this.paratip.Items.AddRange(new object[] {
-            "TL",
+            "TRY",
             "EUR",
             "USD",
             "RUB"});
@@ -103,7 +103,6 @@
             this.paratip.Size = new System.Drawing.Size(167, 21);
             this.paratip.TabIndex = 8;
             this.paratip.Text = "Para Tipini Seçiniz";
-            
             this.paratip.Enter += new System.EventHandler(this.paratip_Enter);
             this.paratip.Leave += new System.EventHandler(this.paratip_Leave);
             // 
@@ -136,7 +135,6 @@
             this.Name = "para_ekle_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para Ekle";
-         
             this.ResumeLayout(false);
             this.PerformLayout();
 

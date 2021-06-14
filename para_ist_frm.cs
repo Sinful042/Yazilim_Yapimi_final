@@ -222,7 +222,7 @@ namespace Proje_Ödevi
             while (oku_2.Read())
 
             {   //Tl'ye cevir
-                if (oku_2["ParaTip"].ToString() == "TL")
+                if (oku_2["ParaTip"].ToString() == "TRY")
                 {
                     tl = istek_para;
 

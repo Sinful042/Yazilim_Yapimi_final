@@ -54,10 +54,10 @@ namespace Proje_Ödevi
             baglanti.Open();
             OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Satis ORDER BY KullaniciAdi ASC", baglanti);
             liste.Fill(tablo);
-            dataGridView1.DataSource = tablo;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Red;
+            satislisteleme.DataSource = tablo;
+            satislisteleme.ReadOnly = true;
+            satislisteleme.DefaultCellStyle.SelectionBackColor = Color.White;
+            satislisteleme.DefaultCellStyle.SelectionForeColor = Color.Red;
             baglanti.Close();
         }
         private void filitre_liste(string Satis_onay)
@@ -65,7 +65,7 @@ namespace Proje_Ödevi
             baglanti.Open();
             OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Satis where SatisOnay = '" + Satis_onay + "'", baglanti);
             liste.Fill(tablo);
-            dataGridView1.DataSource = tablo;
+            satislisteleme.DataSource = tablo;
             baglanti.Close();
         }
 
@@ -78,13 +78,13 @@ namespace Proje_Ödevi
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex==0)
+            if (filtre.SelectedIndex==0)
             {
                 tablo.Clear();
                 filitre = "Onaylandi";
                 filitre_liste(filitre);
             }
-            else if (comboBox1.SelectedIndex==1)
+            else if (filtre.SelectedIndex==1)
             {
                 tablo.Clear();
                 filitre = "Onaylanmadi";
@@ -101,19 +101,19 @@ namespace Proje_Ödevi
         private void onay_btn_Click(object sender, EventArgs e)
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("select *from Satis where SatisOnay= '" + dataGridView1.CurrentRow.Cells["SatisOnay"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut = new OleDbCommand("select *from Satis where SatisOnay= '" + satislisteleme.CurrentRow.Cells["SatisOnay"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {
                 if (oku["SatisOnay"].ToString() == "Onaylandi")
                 {
-                    MessageBox.Show("Şatış isteği daha önce onaylamış", "Tamam");
+                    MessageBox.Show("Şatış isteği daha önce onaylamış", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }
                 else if (oku["SatisOnay"].ToString() == "Onaylanmadi")
                 {
-                    MessageBox.Show("Şatış isteği daha önce reddedilmiş", "Tamam");
+                    MessageBox.Show("Şatış isteği daha önce reddedilmiş", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }
@@ -138,7 +138,7 @@ namespace Proje_Ödevi
         private void onaylama_btn_Click(object sender, EventArgs e)
         {
             baglanti.Open();
-            OleDbCommand komut = new OleDbCommand("select *from Satis where SatisOnay= '" + dataGridView1.CurrentRow.Cells["SatisOnay"].Value.ToString() + "'", baglanti);
+            OleDbCommand komut = new OleDbCommand("select *from Satis where SatisOnay= '" + satislisteleme.CurrentRow.Cells["SatisOnay"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {

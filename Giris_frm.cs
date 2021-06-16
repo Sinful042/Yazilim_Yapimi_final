@@ -66,11 +66,11 @@ namespace Proje_Ödevi
             }
             if (kullacini_txt.Text == " " || sifre_txt.Text=="")
             {
-                MessageBox.Show("Kullani Adi veya şifre boş geçilemez","Tamam");
+                MessageBox.Show("Kullani Adi veya şifre boş geçilemez", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!giris)
             {
-                MessageBox.Show("Kullanici Adi veya Şifre Yanlış", "Tamam");
+                MessageBox.Show("Kullanici Adi veya Şifre Yanlış", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             baglanti.Close();
         }

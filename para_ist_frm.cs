@@ -76,13 +76,13 @@ namespace Proje_Ödevi
             {
                 if (oku["Durum"].ToString()=="Onaylandı")
                 {
-                    MessageBox.Show("Para isteği daha önce onaylamış", "Tamam");
+                    MessageBox.Show("Para isteği daha önce onaylamış", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }
                 else if (oku["Durum"].ToString()=="Onaylanmadi")
                 {
-                    MessageBox.Show("Para isteği daha önce reddedilmiş", "Tamam");
+                    MessageBox.Show("Para isteği daha önce reddedilmiş", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }
@@ -253,7 +253,7 @@ namespace Proje_Ödevi
                 }
                 else if (oku_2["ParaTip"].ToString() == "GBP")
                 {
-                    //rubleye çevir
+                    //gbpye çevir
                     string gbp_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='GBP']/BanknoteSelling").InnerXml;
                     double gbp = Convert.ToDouble(gbp_kur.Replace(".", ","));
                     tl = istek_para * gbp;

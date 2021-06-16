@@ -24,6 +24,8 @@ namespace Proje_Ödevi
         double muhasebe_ücret;
         double harcanan_para;
         double olan_miktar;
+        string Kullanıcı_adi;
+            string Para;
         public fiyatbelirle()
         {
             InitializeComponent();
@@ -32,11 +34,16 @@ namespace Proje_Ödevi
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void cikisfiyatbelirle_Click(object sender, EventArgs e)
         {
+            ana_fr anasayfa = new ana_fr();
+                anasayfa.Para = Para;
+            anasayfa.Kullanici_adi = Kullanıcı_adi;
             satin_al_frm satin_al = new satin_al_frm();
+            
             satin_al.para = alici_para.ToString();
             satin_al.alici_kullanici_adi = alici_kullanici_adi;
             satin_al.Show();
             this.Hide();
+            
         }
         private void fiyatbelirle_btn_Click(object sender, EventArgs e)
         {

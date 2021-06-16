@@ -15,6 +15,8 @@ namespace Proje_Ödevi
     {
         public string kullanici_adi;
         string para_tipi;
+        public string Kullanici_adi;
+        public string Para;
         public para_ekle_frm()
         {
             InitializeComponent();
@@ -56,7 +58,10 @@ namespace Proje_Ödevi
         private void cikisparaekle_Click(object sender, EventArgs e)
         {
             ana_fr anasayfa = new ana_fr();
+            anasayfa.Kullanici_adi = Kullanici_adi;
+            anasayfa.Para = Para;
             anasayfa.Show();
+            this.Hide();
 
         }
 

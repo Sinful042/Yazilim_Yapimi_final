@@ -58,6 +58,7 @@
             this.kullanici_lbl.Size = new System.Drawing.Size(129, 23);
             this.kullanici_lbl.TabIndex = 0;
             this.kullanici_lbl.Text = "Kullanıcı Adı";
+            this.kullanici_lbl.Click += new System.EventHandler(this.kullanici_lbl_Click);
             // 
             // para_lbl
             // 
@@ -164,6 +165,7 @@
             this.urunlistele.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.urunlistele.Size = new System.Drawing.Size(551, 288);
             this.urunlistele.TabIndex = 6;
+            this.urunlistele.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.urunlistele_CellContentClick);
             // 
             // tl
             // 

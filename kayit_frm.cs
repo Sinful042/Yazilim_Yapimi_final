@@ -26,18 +26,18 @@ namespace Proje_Ödevi
             {
                 if (Controls[i] is TextBox)
                 {
-                    if (Controls[i].Text=="Ad" || Controls[i].Text == "Soyad" || Controls[i].Text == "Kullanıcı-Adı" || Controls[i].Text == "Parola" || Controls[i].Text == "TC" || Controls[i].Text == "E-mail" || Controls[i].Text == "Adres" || Controls[i].Text == "Telefon")
+                    if (Controls[i].Text=="Ad" || Controls[i].Text == "Soyad" || Controls[i].Text == "Kullanıcı-Adı" || Controls[i].Text == "Parola" || Controls[i].Text == "Parola-Tekrar" || Controls[i].Text == "TC" || Controls[i].Text == "E-mail" || Controls[i].Text == "Adres" || Controls[i].Text == "Telefon")
                     {
                         MessageBox.Show("Eksik Bilgi Girdiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         kayit_yapildi = false;
                         break;
-                        
-
+                     
                     }
 
                 }
                 else
                 {
+                    MessageBox.Show("Kaydınız başarıyla yapıldı.", "Tamam");
                     kayit_yapildi = true;
                 }
                 

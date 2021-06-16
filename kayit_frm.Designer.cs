@@ -49,7 +49,7 @@
             this.kayit_btn.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.kayit_btn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.kayit_btn.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.kayit_btn.Location = new System.Drawing.Point(396, 464);
+            this.kayit_btn.Location = new System.Drawing.Point(34, 464);
             this.kayit_btn.Name = "kayit_btn";
             this.kayit_btn.Size = new System.Drawing.Size(150, 39);
             this.kayit_btn.TabIndex = 8;
@@ -177,7 +177,7 @@
             this.gerikayit.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.gerikayit.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.gerikayit.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.gerikayit.Location = new System.Drawing.Point(34, 464);
+            this.gerikayit.Location = new System.Drawing.Point(396, 464);
             this.gerikayit.Name = "gerikayit";
             this.gerikayit.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.gerikayit.Size = new System.Drawing.Size(150, 39);

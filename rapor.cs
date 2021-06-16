@@ -12,6 +12,8 @@ namespace Proje_Ödevi
 {
     public partial class rapor : Form
     {
+        public string Kullanici_adi;
+        public string Para;
         public rapor()
         {
             InitializeComponent();
@@ -21,6 +23,8 @@ namespace Proje_Ödevi
         {
             hesap hesap = new hesap();
             hesap.Show();
+            hesap.Kullanici_adi = Kullanici_adi;
+            hesap.Para = Para;
             this.Hide();
         }
 

@@ -33,9 +33,9 @@ namespace Proje_Ödevi
             OleDbDataAdapter liste = new OleDbDataAdapter("select * from Kullanici where Yetki='" + "Kullanici" + "'", baglanti);
       
             liste.Fill(tablo);
-            dataGridViewSo.DataSource = tablo;
-            dataGridViewSo.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridViewSo.DefaultCellStyle.SelectionForeColor = Color.Red;
+            tumkullanicilar.DataSource = tablo;
+            tumkullanicilar.DefaultCellStyle.SelectionBackColor = Color.White;
+            tumkullanicilar.DefaultCellStyle.SelectionForeColor = Color.Red;
             baglanti.Close();
 
         }

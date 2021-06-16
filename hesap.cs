@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace Proje_Ödevi
 {
@@ -14,6 +15,9 @@ namespace Proje_Ödevi
     {
         public string Kullanici_adi;
         public string Para;
+
+        OleDbConnection baglanti = Giris_frm.baglanti_kur();
+        DataTable tablo = new DataTable();
         public hesap()
         {
             InitializeComponent();
@@ -21,16 +25,19 @@ namespace Proje_Ödevi
 
         private void gerihesap_Click(object sender, EventArgs e)
         {
-            ana_fr anasayfa = new ana_fr();
-            anasayfa.Kullanici_adi = Kullanici_adi;
-            anasayfa.Para = Para;
-            anasayfa.Show();
+            hesap hesap = new hesap();
+            hesap.Kullanici_adi = Kullanici_adi;
+            hesap.Para = Para;
+            hesap.Show();
             this.Hide();
         }
 
         private void rapor_Click(object sender, EventArgs e)
         {
             rapor rapor = new rapor();
+            
+            rapor.Kullanici_adi = Kullanici_adi;
+            rapor.Para = Para;
             rapor.Show();
             this.Hide();
         }
@@ -42,6 +49,20 @@ namespace Proje_Ödevi
 
         private void hesap_Load(object sender, EventArgs e)
         {
+            kullanici_lbl.Text = Kullanici_adi;
+            para_lbl.Text = Para;
+
+            listele();
+        }
+        public void listele()
+        {
+            baglanti.Open();
+            OleDbDataAdapter liste = new OleDbDataAdapter("select Ad,Soyad,Parola,TC,ePosta,Adres,Telefon from Kullanici where KullaniciAdi = '" + Kullanici_adi + "'", baglanti);
+            liste.Fill(tablo);
+            kullanicibilgileri.DataSource = tablo;
+            kullanicibilgileri.DefaultCellStyle.SelectionBackColor = Color.White;
+            kullanicibilgileri.DefaultCellStyle.SelectionForeColor = Color.Red;
+            baglanti.Close();
 
         }
     }

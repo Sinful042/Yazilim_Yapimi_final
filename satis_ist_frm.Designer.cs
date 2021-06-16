@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(satis_ist_frm));
             this.onay_btn = new System.Windows.Forms.Button();
             this.onaylama_btn = new System.Windows.Forms.Button();
             this.cikis_btn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.admin_label = new System.Windows.Forms.Label();
+            this.filtre_lbl = new System.Windows.Forms.Label();
+            this.satislisteleme = new System.Windows.Forms.DataGridView();
+            this.filtre = new System.Windows.Forms.ComboBox();
+            this.satis_label = new System.Windows.Forms.Label();
             this.cikissatisistek = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.satislisteleme)).BeginInit();
             this.SuspendLayout();
             // 
             // onay_btn
@@ -76,52 +81,82 @@
             this.cikis_btn.UseVisualStyleBackColor = false;
             this.cikis_btn.Click += new System.EventHandler(this.cikis_btn_Click);
             // 
-            // label1
+            // filtre_lbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(525, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 22);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Filtre:";
+            this.filtre_lbl.AutoSize = true;
+            this.filtre_lbl.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.filtre_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.filtre_lbl.Location = new System.Drawing.Point(525, 19);
+            this.filtre_lbl.Name = "filtre_lbl";
+            this.filtre_lbl.Size = new System.Drawing.Size(55, 22);
+            this.filtre_lbl.TabIndex = 13;
+            this.filtre_lbl.Text = "Filtre:";
             // 
-            // dataGridView1
+            // satislisteleme
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightGray;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 66);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(715, 226);
-            this.dataGridView1.TabIndex = 12;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.satislisteleme.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.satislisteleme.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.satislisteleme.BackgroundColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.satislisteleme.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.satislisteleme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.satislisteleme.DefaultCellStyle = dataGridViewCellStyle3;
+            this.satislisteleme.GridColor = System.Drawing.Color.Black;
+            this.satislisteleme.Location = new System.Drawing.Point(18, 66);
+            this.satislisteleme.Name = "satislisteleme";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.satislisteleme.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.satislisteleme.RowHeadersVisible = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.satislisteleme.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.satislisteleme.Size = new System.Drawing.Size(715, 226);
+            this.satislisteleme.TabIndex = 12;
             // 
-            // comboBox1
+            // filtre
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.filtre.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.filtre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filtre.FormattingEnabled = true;
+            this.filtre.Items.AddRange(new object[] {
             "Onaylanan Kullanıclar",
             "Onaylanmayan Kullanıcılar",
             "Onay Bekleyen Kullanıcılar"});
-            this.comboBox1.Location = new System.Drawing.Point(583, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(142, 21);
-            this.comboBox1.TabIndex = 11;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.filtre.Location = new System.Drawing.Point(583, 20);
+            this.filtre.Name = "filtre";
+            this.filtre.Size = new System.Drawing.Size(142, 21);
+            this.filtre.TabIndex = 11;
+            this.filtre.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // admin_label
+            // satis_label
             // 
-            this.admin_label.AutoSize = true;
-            this.admin_label.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.admin_label.Font = new System.Drawing.Font("Georgia", 15F);
-            this.admin_label.Location = new System.Drawing.Point(20, 20);
-            this.admin_label.Name = "admin_label";
-            this.admin_label.Size = new System.Drawing.Size(139, 24);
-            this.admin_label.TabIndex = 10;
-            this.admin_label.Text = "Satış İstekleri:";
+            this.satis_label.AutoSize = true;
+            this.satis_label.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.satis_label.Font = new System.Drawing.Font("Georgia", 15F);
+            this.satis_label.Location = new System.Drawing.Point(20, 20);
+            this.satis_label.Name = "satis_label";
+            this.satis_label.Size = new System.Drawing.Size(139, 24);
+            this.satis_label.TabIndex = 10;
+            this.satis_label.Text = "Satış İstekleri:";
             // 
             // cikissatisistek
             // 
@@ -146,10 +181,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(758, 402);
             this.Controls.Add(this.cikissatisistek);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.admin_label);
+            this.Controls.Add(this.filtre_lbl);
+            this.Controls.Add(this.satislisteleme);
+            this.Controls.Add(this.filtre);
+            this.Controls.Add(this.satis_label);
             this.Controls.Add(this.onay_btn);
             this.Controls.Add(this.onaylama_btn);
             this.Controls.Add(this.cikis_btn);
@@ -159,7 +194,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Satış İstekleri";
             this.Load += new System.EventHandler(this.satis_ist_frm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.satislisteleme)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,10 +205,10 @@
         private System.Windows.Forms.Button onay_btn;
         private System.Windows.Forms.Button onaylama_btn;
         private System.Windows.Forms.Button cikis_btn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label admin_label;
+        private System.Windows.Forms.Label filtre_lbl;
+        private System.Windows.Forms.DataGridView satislisteleme;
+        private System.Windows.Forms.ComboBox filtre;
+        private System.Windows.Forms.Label satis_label;
         private System.Windows.Forms.Button cikissatisistek;
     }
 }

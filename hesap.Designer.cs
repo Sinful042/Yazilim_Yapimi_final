@@ -105,6 +105,7 @@
             this.Name = "hesap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "hesap";
+            this.Load += new System.EventHandler(this.hesap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

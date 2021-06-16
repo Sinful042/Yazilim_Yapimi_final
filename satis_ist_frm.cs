@@ -13,21 +13,36 @@ namespace Proje_Ödevi
 {
     public partial class satis_ist_frm : Form
     {
+        //satici kullanici bilgisi 
         string Kullanici_adi;
+        //satilacak ürün bilgisi
         string Urunid;
-        int Fiyat;
-        string durum;
-        string filitre;
-        int total_miktar,miktar;
-        int total_para, harcanan_para;
-        int muhasebe_ucret,olan_miktar;
+        //satilacak ürün birimi
         string urun_birim;
-        int urun_miktar;
+        //satis durumu bilgisi 
+        string durum;
+        //isteninlen filitre bilgisi
+        string filitre;
+        //satilmak istenen fiyat alınıyor
+        double Fiyat;
+        //toplam miktar ve satilacak miktar bilgisi
+        double total_miktar,miktar;
+        //toplam para ve harcanan para bilgisi (otomatik alım için)
+        double total_para, harcanan_para;
+        //otomatik alım olursa muhasebe ücreti
+        double muhasebe_ucret,olan_miktar;
+        //satisa çıkıcak ürün miktari
+        double urun_miktar;
+        //alinan ürünün alıcıda daha once olup olmadıgının kontrolü
+        bool urunu_var = false;
         public satis_ist_frm()
         {
             InitializeComponent();
         }
+
+        //veri tabani baglantisi kuruluyor
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
+        //satis istekleri icin dataTable olusturuluyor
         DataTable tablo = new DataTable();
         private void satis_ist_frm_Load(object sender, EventArgs e)
         {
@@ -106,9 +121,9 @@ namespace Proje_Ödevi
                 {
                     Kullanici_adi = oku["KullaniciAdi"].ToString();
                     Urunid = oku["UrunAdi"].ToString();
-                    Fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
+                    Fiyat = Convert.ToDouble(oku["UrunFiyat"].ToString().Replace(".",","));
                     urun_birim = oku["UrunBirim"].ToString();
-                    urun_miktar = Int32.Parse(oku["sUrunMiktar"].ToString());
+                    urun_miktar = Convert.ToDouble(oku["sUrunMiktar"].ToString().Replace(".", ","));
                     durum = "Onaylandi";
                     baglanti.Close();
                     durum_güncelle(Kullanici_adi,Urunid,Fiyat,durum);
@@ -143,8 +158,8 @@ namespace Proje_Ödevi
                 {
                     Kullanici_adi = oku["KullaniciAdi"].ToString();
                     Urunid = oku["UrunAdi"].ToString();
-                    Fiyat = Convert.ToInt32(oku["UrunFiyat"].ToString());
-                    miktar = Convert.ToInt32(oku["sUrunMiktar"].ToString());
+                    Fiyat = Convert.ToDouble(oku["UrunFiyat"].ToString().Replace(".",","));
+                    miktar = Convert.ToDouble(oku["sUrunMiktar"].ToString().Replace(".", ","));
                     durum = "Onaylanmadi";
                     baglanti.Close();
                     durum_güncelle(Kullanici_adi, Urunid, Fiyat,durum);
@@ -154,7 +169,7 @@ namespace Proje_Ödevi
                 }
             }
         }
-        private void durum_güncelle(string KullaniU,string Urunid,int fiyat,string durum)
+        private void durum_güncelle(string KullaniU,string Urunid,double fiyat,string durum)
         {
             baglanti.Open();
             OleDbCommand komut_2 = new OleDbCommand("update Satis set SatisOnay = '" + durum + "' where KullaniciAdi = '" + Kullanici_adi + "' and UrunAdi='"+Urunid+"' and UrunFiyat='"+fiyat.ToString()+"'", baglanti);
@@ -171,7 +186,7 @@ namespace Proje_Ödevi
             Application.Exit();
         }
 
-        private void ürün_iptal(string KullaniU,string Urunid,int miktar)
+        private void ürün_iptal(string KullaniU,string Urunid,double miktar)
         {
             baglanti.Open();
             OleDbCommand komut = new OleDbCommand("select *from kUrun where KullaniciU= '" + KullaniU + "'", baglanti);
@@ -180,8 +195,8 @@ namespace Proje_Ödevi
             {
                 if (oku["UrunAdi"].ToString()==Urunid)
                 {
-                   total_miktar = Convert.ToInt32(oku["UrunMiktar"].ToString());
-                   total_miktar += miktar;
+                    total_miktar = Convert.ToDouble(oku["sUrunMiktar"].ToString().Replace(".", ","));
+                    total_miktar += miktar;
                     break;
                 }
             }
@@ -190,7 +205,7 @@ namespace Proje_Ödevi
             baglanti.Close();
         }
 
-        private void Alis_istek_kntrl(string satici,string urun,int fiyat,int satilan_miktar,string birim)
+        private void Alis_istek_kntrl(string satici,string urun,double fiyat,double satilan_miktar,string birim)
         {
             baglanti.Open();
             OleDbCommand komut = new OleDbCommand();
@@ -201,24 +216,24 @@ namespace Proje_Ödevi
             {
                 if (oku["AlisDurum"].ToString() == "Bekleniyor")
                 {
-                    if (Int32.Parse(oku["istekMiktar"].ToString())<=satilan_miktar)
+                    if (Convert.ToDouble(oku["istekMiktar"].ToString().Replace(".",",")) <= satilan_miktar)
                     {
-                        satilan_miktar = Int32.Parse(oku["istekMiktar"].ToString());
-                        istek_alim(satici, oku["KullaniciAdi"].ToString(), urun, fiyat,satilan_miktar, birim);
-                        
+                        satilan_miktar = Convert.ToDouble(oku["istekMiktar"].ToString().Replace(".", ","));
+                        istek_alim(satici, oku["KullaniciAdi"].ToString(), urun, fiyat, satilan_miktar, birim);
+
                     }
                 }
             }
             baglanti.Close();
 
         }
-        private void istek_alim(string satici,string alici,string urun,int fiyat,int miktar,string birim)
+        private void istek_alim(string satici,string alici,string urun,double fiyat,double miktar,string birim)
         {
             OleDbCommand sorgu = new OleDbCommand("select *from Kullanici where KullaniciAdi ='"+alici+"'", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
             while (oku.Read())
             {
-                if ((fiyat*miktar)<=Int32.Parse(oku["Cuzdan"].ToString()))
+                if ((fiyat*miktar)<=Convert.ToDouble(oku["Cuzdan"].ToString().Replace(".",",")))
                 {
                     //Satıcıya parası gönderiliyor.
                     Para_gonder(satici,(miktar*fiyat));
@@ -231,15 +246,16 @@ namespace Proje_Ödevi
                     //Alıcının parası güncelleniyor.
                     Para_cikar(alici, harcanan_para);
                     //satılan ürün satış listesinden çıkarılıyor.
-                    satistan_cikar(urun,satici, miktar,fiyat);
+                    satistan_cikar(urun,satici,miktar,fiyat);
                     //alınan ürün alıcının hesabına aktarılıyor.
                     urun_ekle(alici, miktar.ToString(), urun,birim);
+                    alis_durum(alici,urun,fiyat);
                 }
             }
 
 
         }
-        private void Para_gonder(string satici_Kullanici_adi, int gelen_para)
+        private void Para_gonder(string satici_Kullanici_adi, double gelen_para)
         {
 
 
@@ -250,7 +266,7 @@ namespace Proje_Ödevi
                 if (oku["KullaniciAdi"].ToString() == satici_Kullanici_adi)
                 {
 
-                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    total_para = Convert.ToDouble(oku["Cuzdan"].ToString().Replace(".",","));
                     break;
                 }
 
@@ -262,7 +278,7 @@ namespace Proje_Ödevi
 
 
         }
-        private void Para_cikar(string Kullanici_adi, int giden_para)
+        private void Para_cikar(string Kullanici_adi, double giden_para)
         {
 
             OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
@@ -272,7 +288,7 @@ namespace Proje_Ödevi
                 if (oku["KullaniciAdi"].ToString() == Kullanici_adi)
                 {
 
-                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    total_para = Convert.ToDouble(oku["Cuzdan"].ToString().Replace(".", ","));
                     break;
                 }
 
@@ -285,11 +301,36 @@ namespace Proje_Ödevi
         }
         private void urun_ekle(string Kullanici_adi, string alinan_miktar, string urunAd, string Birim)
         {
+            //Onceden bu urune sahip mi kontrol ediyoruz.
+            OleDbCommand sorgu = new OleDbCommand("select *from kUrun where KullaniciU='"+Kullanici_adi+"'", baglanti);
+            OleDbDataReader oku = sorgu.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["UrunAdi"].ToString() == urunAd)
+                {
+                    olan_miktar = Convert.ToDouble(oku["UrunMiktar"].ToString().Replace(".",","));
+                    total_miktar = olan_miktar + Convert.ToDouble(alinan_miktar.Replace(".", ","));
+                    urunu_var = true;
+                    break;
+                }
 
-            OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
-            komut.ExecuteNonQuery();
+            }
+
+
+
+            if (!urunu_var)
+            {
+                OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
+                komut.ExecuteNonQuery();
+            }
+            else
+            {
+                OleDbCommand komut = new OleDbCommand("update kUrun set UrunMiktar = '" + total_miktar.ToString() + "' where KullaniciU ='" + Kullanici_adi + "' AND UrunAdi = '" + urunAd + "'", baglanti);
+                komut.ExecuteNonQuery();
+            }
+            
         }
-        private void satistan_cikar(string Urunadi, string Kullanici_Adi, int alinan_miktar, int alinan_fiyat)
+        private void satistan_cikar(string Urunadi, string Kullanici_Adi, double alinan_miktar, double alinan_fiyat)
         {
 
             OleDbCommand sorgu = new OleDbCommand("select *from Satis where UrunAdi= '" + Urunadi + "'", baglanti);
@@ -298,12 +339,18 @@ namespace Proje_Ödevi
             {
                 if (oku["KullaniciAdi"].ToString() == Kullanici_Adi)
                 {
-                    olan_miktar = Convert.ToInt32(oku["SUrunMiktar"].ToString());
+                    olan_miktar = Convert.ToDouble(oku["SUrunMiktar"].ToString().Replace(",",","));
                     break;
                 }
             }
             olan_miktar -= alinan_miktar;
             OleDbCommand komut = new OleDbCommand("update Satis set sUrunMiktar='" + olan_miktar.ToString() + "' where KullaniciAdi='" + Kullanici_Adi + "' and UrunAdi='" + Urunadi + "' and UrunFiyat ='" + alinan_fiyat.ToString() + "'", baglanti);
+            komut.ExecuteNonQuery();
+
+        }
+        private void alis_durum(string kullanici_adi,string urun,double istek_miktar)
+        {
+            OleDbCommand komut = new OleDbCommand("update Alis set AlisDurum = '" + durum + "' where KullaniciAdi = '" + kullanici_adi + "' and UrunAdi = '" + urun + "' and istekMiktar= '" + istek_miktar.ToString() + "'", baglanti);
             komut.ExecuteNonQuery();
 
         }

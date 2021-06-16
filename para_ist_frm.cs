@@ -26,7 +26,9 @@ namespace Proje_Ödevi
         {
             InitializeComponent();
         }
+        //veri tabanı baglantisi kuruluyor
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
+        //para istekleri için dataTable olusturuluyor.
         DataTable tablo = new DataTable();
         private void cikis_btn_Click(object sender, EventArgs e)
         {
@@ -123,7 +125,8 @@ namespace Proje_Ödevi
                     baglanti.Close();
                     durum = "Onaylanmadi";
                     string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
-                    Durum_güncelle(durum,istek);
+                    string kullanici = paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString();
+                    Durum_güncelle(durum,istek,kullanici);
                     MessageBox.Show("Reddetme Başarılı", "Tamam");
                     break;
                     
@@ -143,10 +146,10 @@ namespace Proje_Ödevi
             baglanti.Close();
             MessageBox.Show("Onaylama Başarılı", "Tamam");
         }
-        public void Durum_güncelle(string durum,string istek)
+        public void Durum_güncelle(string durum,string istek,string kullanici)
         {
             baglanti.Open();
-            OleDbCommand sorgu = new OleDbCommand("update Paraekle set Durum= '" + durum + "' where İstekPekle=  '" + istek + "'", baglanti);
+            OleDbCommand sorgu = new OleDbCommand("update Paraekle set Durum= '" + durum + "' where İstekPekle=  '" + istek + "' and KullaniciPekle = '"+kullanici+"'", baglanti);
             sorgu.ExecuteReader();
             baglanti.Close();
             tablo.Clear();
@@ -181,7 +184,8 @@ namespace Proje_Ödevi
             para_güncelle(total_para);
             durum = "Onaylandı";
             string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
-            Durum_güncelle(durum,istek);
+            string kullanici = paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString();
+            Durum_güncelle(durum,istek,kullanici);
 
 
         }
@@ -247,15 +251,13 @@ namespace Proje_Ödevi
                     tl = istek_para * usd;
                     tl = Math.Round(tl, 2);
                 }
-                
-                else
+                else if (oku_2["ParaTip"].ToString() == "GBP")
                 {
                     //rubleye çevir
-                    string rub_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='RUB']/BanknoteSelling").InnerXml;
-                    double rub = Convert.ToDouble(rub_kur.Replace(".",","));
-                    tl = istek_para * rub;
+                    string gbp_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='GBP']/BanknoteSelling").InnerXml;
+                    double gbp = Convert.ToDouble(gbp_kur.Replace(".", ","));
+                    tl = istek_para * gbp;
                     tl = Math.Round(tl, 2);
-
                 }
             }
 

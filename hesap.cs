@@ -12,6 +12,8 @@ namespace Proje_Ödevi
 {
     public partial class hesap : Form
     {
+        public string Kullanici_adi;
+        public string Para;
         public hesap()
         {
             InitializeComponent();
@@ -20,6 +22,8 @@ namespace Proje_Ödevi
         private void gerihesap_Click(object sender, EventArgs e)
         {
             ana_fr anasayfa = new ana_fr();
+            anasayfa.Kullanici_adi = Kullanici_adi;
+            anasayfa.Para = Para;
             anasayfa.Show();
             this.Hide();
         }
@@ -34,6 +38,11 @@ namespace Proje_Ödevi
         private void cikishesap_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void hesap_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

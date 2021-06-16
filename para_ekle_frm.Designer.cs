@@ -97,7 +97,7 @@
             "TRY",
             "EUR",
             "USD",
-            "RUB"});
+            "GBP"});
             this.paratip.Location = new System.Drawing.Point(65, 149);
             this.paratip.Name = "paratip";
             this.paratip.Size = new System.Drawing.Size(167, 21);

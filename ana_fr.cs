@@ -14,7 +14,7 @@ namespace Proje_Ödevi
     
     public partial class ana_fr : Form
     {
-        public String Kullanici_adi;
+        public string Kullanici_adi;
         public string Para;
         
         public ana_fr()
@@ -86,6 +86,8 @@ namespace Proje_Ödevi
         private void avatar_Click(object sender, EventArgs e)
         {
             hesap hesap = new hesap();
+            hesap.Kullanici_adi = Kullanici_adi;
+            hesap.Para = Para;
             hesap.Show();
             this.Hide();
         }

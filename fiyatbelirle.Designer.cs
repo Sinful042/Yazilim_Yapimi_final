@@ -96,6 +96,7 @@
             this.Name = "fiyatbelirle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fiyatbelirle";
+            this.Load += new System.EventHandler(this.fiyatbelirle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -14,16 +14,16 @@ namespace Proje_Ödevi
     public partial class fiyatbelirle : Form
     {
         //satın al forumdan gerekli değişkenleri alıyoruz.
-        public int istek_birim;
+        public double istek_birim;
         public string istek_ürün;
         public string alici_kullanici_adi;
-        public int alici_para;
+        public double alici_para;
         //Satın alım işlemi için gerekli değişkenleri alıyoruz.
-        int istek_fiyat;
-        int total_para;
-        int muhasebe_ücret;
-        int harcanan_para;
-        int olan_miktar;
+        double istek_fiyat;
+        double total_para;
+        double muhasebe_ücret;
+        double harcanan_para;
+        double olan_miktar;
         public fiyatbelirle()
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace Proje_Ödevi
 
             }
             //Alıcının bakiyesi kontrol ediliyor
-            else if (alici_para < (istek_birim * Int32.Parse(fiyatb_txt.Text)))
+            else if (alici_para < (istek_birim * Convert.ToDouble(fiyatb_txt.Text.Replace(".",","))))
             {
                 MessageBox.Show("Bakiyeniz yetersizdir", "Para Yükle");
                 satin_al_frm satin_al = new satin_al_frm();
@@ -59,12 +59,12 @@ namespace Proje_Ödevi
             //bakiyesi yeterli oldugu durumda satış kontrol işlemi başlıyor.
             else
             {
-                istek_fiyat = Int32.Parse(fiyatb_txt.Text);
+                istek_fiyat = Convert.ToDouble(fiyatb_txt.Text.Replace(".",","));
                 satis_kntrl(istek_fiyat, alici_kullanici_adi, istek_ürün, istek_birim);
             }
 
         }
-        public void satis_kntrl(int istek_fiyat, string alici, string ürün, int istek_miktar)
+        public void satis_kntrl(double istek_fiyat, string alici, string ürün, double istek_miktar)
         {
             //Satis listesinde istek miktar ve istek fiyatda ürünün kontrolü yapılıyor
             bool satisda_var = false;
@@ -78,11 +78,11 @@ namespace Proje_Ödevi
             {
                 if (istek_fiyat >= Int32.Parse(oku["UrunFiyat"].ToString()))
                 {
-                    if (istek_miktar < Int32.Parse(oku["sUrunMiktar"].ToString()))
+                    if (istek_miktar < Convert.ToDouble(oku["sUrunMiktar"].ToString().Replace(".",",")))
                     {
                         //istek miktar ve istek fiyatda ürün olduğu için satın alım gerçekleşiyor.
                         //Satıcıya parası gönderiliyor.
-                        Para_gonder(oku["KullaniciAdi"].ToString(), (Int32.Parse(oku["UrunFiyat"].ToString()) * istek_miktar));
+                        Para_gonder(oku["KullaniciAdi"].ToString(),(Int32.Parse(oku["UrunFiyat"].ToString()) * istek_miktar));
                         //muhasebe ücreti hesaplanıyor
                         muhasebe_ücret = (Int32.Parse(oku["UrunFiyat"].ToString()) * istek_miktar) / 100;
                         //muhasebe ücreti gönderiliyor.
@@ -94,7 +94,7 @@ namespace Proje_Ödevi
                         //satılan ürün satış listesinden çıkarılıyor.
                         satistan_cikar(ürün, oku["KullaniciAdi"].ToString(),istek_miktar,Int32.Parse(oku["UrunFiyat"].ToString()));
                         //alınan ürün alıcının hesabına aktarılıyor.
-                        urun_ekle(alici, istek_miktar.ToString(), ürün, oku["UrunBirim"].ToString());
+                        urun_ekle(alici, istek_miktar, ürün, oku["UrunBirim"].ToString());
                         //Satin alım işlemi tamam.
                         MessageBox.Show("Satın alım işlemi gerçekleştirildi", "Alım Gerçekleşti!");
                         satisda_var = true;
@@ -119,7 +119,7 @@ namespace Proje_Ödevi
 
         }
 
-        private void Beklemeye_al(string alici, int istek_fiyat, int istek_miktar, string ürün)
+        private void Beklemeye_al(string alici, double istek_fiyat, double istek_miktar, string ürün)
         {
             baglanti.Open();
             OleDbCommand komut = new OleDbCommand("insert into Alis(KullaniciAdi,UrunAdi,istekMiktar,istekFiyat) values('" + alici + "','" + ürün + "','" + istek_miktar.ToString() + "','" + istek_fiyat.ToString() + "')", baglanti);
@@ -132,10 +132,8 @@ namespace Proje_Ödevi
             satin_al.Show();
             this.Hide();
         }
-        private void Para_gonder(string satici_Kullanici_adi, int gelen_para)
+        private void Para_gonder(string satici_Kullanici_adi, double gelen_para)
         {
-
-
             OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
@@ -143,7 +141,7 @@ namespace Proje_Ödevi
                 if (oku["KullaniciAdi"].ToString() == satici_Kullanici_adi)
                 {
 
-                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    total_para = Convert.ToDouble(oku["Cuzdan"].ToString().Replace(".",","));
                     break;
                 }
 
@@ -155,7 +153,7 @@ namespace Proje_Ödevi
 
 
         }
-        private void Para_cikar(string Kullanici_adi, int giden_para)
+        private void Para_cikar(string Kullanici_adi, double giden_para)
         {
 
             OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
@@ -165,13 +163,12 @@ namespace Proje_Ödevi
                 if (oku["KullaniciAdi"].ToString() == Kullanici_adi)
                 {
 
-                    total_para = Convert.ToInt32(oku["Cuzdan"].ToString());
+                    total_para = Convert.ToDouble(oku["Cuzdan"].ToString().Replace(".",","));
                     break;
                 }
 
             }
             total_para -= giden_para;
-            //yenipara = total_para;
             OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + total_para.ToString() + "' where KullaniciAdi = '" + Kullanici_adi + "'", baglanti);
             komut_2.ExecuteNonQuery();
             alici_para = total_para;
@@ -179,13 +176,13 @@ namespace Proje_Ödevi
 
 
         }
-        private void urun_ekle(string Kullanici_adi, string alinan_miktar, string urunAd, string Birim)
+        private void urun_ekle(string Kullanici_adi, double alinan_miktar, string urunAd, string Birim)
         {
 
-            OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
+            OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar.ToString() + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
             komut.ExecuteNonQuery();
         }
-        private void satistan_cikar(string Urunadi, string Kullanici_Adi, int alinan_miktar, int alinan_fiyat)
+        private void satistan_cikar(string Urunadi, string Kullanici_Adi, double alinan_miktar, int alinan_fiyat)
         {
             
             OleDbCommand sorgu = new OleDbCommand("select *from Satis where UrunAdi= '" + Urunadi + "'", baglanti);
@@ -194,7 +191,7 @@ namespace Proje_Ödevi
             {
                 if (oku["KullaniciAdi"].ToString() == Kullanici_Adi)
                 {
-                    olan_miktar = Convert.ToInt32(oku["SUrunMiktar"].ToString());
+                    olan_miktar = Convert.ToDouble(oku["SUrunMiktar"].ToString().Replace(".",","));
                     break;
                 }
             }
@@ -204,6 +201,9 @@ namespace Proje_Ödevi
 
         }
 
-      
+        private void fiyatbelirle_Load(object sender, EventArgs e)
+        {
+
+        }
     } 
 }

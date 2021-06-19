@@ -140,6 +140,7 @@
             this.Name = "Giris_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Giriş Yap";
+            this.Load += new System.EventHandler(this.Giris_frm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

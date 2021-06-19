@@ -135,6 +135,7 @@
             this.Name = "para_ekle_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Para Ekle";
+            this.Load += new System.EventHandler(this.para_ekle_frm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

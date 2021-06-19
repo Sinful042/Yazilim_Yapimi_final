@@ -13,15 +13,18 @@ namespace Proje_Ödevi
 {
     public partial class kayit_frm : Form
     {
+        //kayitin kontrolü için değişkenler
         bool kayit_yapildi = true;
         bool kullani_adi_yok = true;
         public kayit_frm()
         {
             InitializeComponent();
         }
+        //baglantiyi kuruyoruz.
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void kayit_btn_Click(object sender, EventArgs e)
         {
+            //textboxların boş olup olmadıgını kontrol ediyoruz
             for (int i = 0; i < Controls.Count; i++)
             {
                 if (Controls[i] is TextBox)
@@ -42,6 +45,7 @@ namespace Proje_Ödevi
                 }
                 
             }
+            //daha önce boyle bir kullanıcı adı  olup olmadıgını kontrol ediyoruz
             baglanti.Open();
             OleDbCommand sorgu = new OleDbCommand("select *from Kullanici", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
@@ -73,7 +77,7 @@ namespace Proje_Ödevi
             {
 
 
-
+                //girilen değerler şartlara uyuyorsa kullanıcıyı kaydediyoruz
                 if (kayit_yapildi && kullani_adi_yok)
                 {
                     baglanti.Open();

@@ -13,11 +13,12 @@ namespace Proje_Ödevi
 {
     public partial class satis_frm : Form
     {
+        //Gerekli değişkenler tanımlanıyor
         public string Kullanici_adi;
         public string Urun_id;
-        public double istek_miktar;
+        double istek_miktar;
         double olan_miktar;
-        int birim_fiyat;
+        double birim_fiyat;
         string birim;
         
         public string Para;
@@ -26,20 +27,23 @@ namespace Proje_Ödevi
         {
             InitializeComponent();
         }
+        //baglantiyi kuruyoruz
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void onay_btn_Click(object sender, EventArgs e)
         {
+            //istek miktarı ve birim fiyatı textboxlardan alıyoruz
             istek_miktar = Convert.ToDouble(birimdeger.Text.Replace(".", ","));
-            birim_fiyat = Convert.ToInt32(birimfiyat.Text);
+            birim_fiyat = Convert.ToDouble(birimfiyat.Text.Replace(".",","));
             baglanti.Open();
 
 
-
+            //kUrun tablosu kullanici adina ve urun adina göre okuyoruz
             OleDbCommand sorgu = new OleDbCommand("select *from kUrun where KullaniciU= '" + Kullanici_adi + "'and UrunAdi='"+Urun_id+"'", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
             while (oku.Read())
             {
                 olan_miktar = Convert.ToDouble(oku["UrunMiktar"].ToString());
+                //satmak istediği miktarı olan miktarı ile karşılaştırıyoruz
                 if (istek_miktar>olan_miktar)
                 {
                    MessageBox.Show("Bu miktarda ürününüz bulunmamaktadır", "Tamam");
@@ -48,6 +52,7 @@ namespace Proje_Ödevi
                 }
                else
                {
+                   //satmak istediği miktarı çıkarıp satis listesine ekliyoruz
                    olan_miktar -= istek_miktar;
                    birim = oku["UrunBirim"].ToString();
                    baglanti.Close();
@@ -60,14 +65,18 @@ namespace Proje_Ödevi
         }
         private void MiktarGüncelle(string KullaniciU,double miktar,string UrunAdi)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //kUrun tablosunda kullanicinin ürününün miktarını güncelliyoruz
             OleDbCommand komut_2 = new OleDbCommand("update kUrun set UrunMiktar = '" + miktar.ToString() + "' where KullaniciU = '" + KullaniciU + "' and  UrunAdi='"+UrunAdi+"'", baglanti);
             komut_2.ExecuteNonQuery();
             baglanti.Close();
         }
-        private void satisa_ekle(string kullaniU,string Urunid,double miktar,int fiyat,string birim)
+        private void satisa_ekle(string kullaniU,string Urunid,double miktar,double fiyat,string birim)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //satis listesine satis isteğini kayit ediyoruz
             OleDbCommand komut = new OleDbCommand("insert into Satis(KullaniciAdi,UrunAdi,sUrunMiktar,UrunBirim,UrunFiyat) values('" + kullaniU + "','" + Urunid + "','" + miktar.ToString() + "','" + birim + "','" + fiyat.ToString() + "')", baglanti);
             komut.ExecuteNonQuery();
             baglanti.Close();
@@ -77,6 +86,7 @@ namespace Proje_Ödevi
 
         private void cikisparaekle_Click(object sender, EventArgs e)
         {
+            //aan forumu acip bu forumu kapatiyoruz
             ana_fr anasayfa = new ana_fr();
             anasayfa.Kullanici_adi = Kullanici_adi;
             anasayfa.Para = Para;

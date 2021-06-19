@@ -24,8 +24,9 @@ namespace Proje_Ödevi
         double muhasebe_ücret;
         double harcanan_para;
         double olan_miktar;
-        string Kullanıcı_adi;
-            string Para;
+        //alinan ürünün alıcıda daha once olup olmadıgının kontrolü
+        bool urunu_var = false;
+        double total_miktar;
         public fiyatbelirle()
         {
             InitializeComponent();
@@ -34,11 +35,8 @@ namespace Proje_Ödevi
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void cikisfiyatbelirle_Click(object sender, EventArgs e)
         {
-            ana_fr anasayfa = new ana_fr();
-                anasayfa.Para = Para;
-            anasayfa.Kullanici_adi = Kullanıcı_adi;
+            //satin alma formunu açıyorum ve gerekli bilgileri gönderikten sonra bu formu kpatıyorum.
             satin_al_frm satin_al = new satin_al_frm();
-            
             satin_al.para = alici_para.ToString();
             satin_al.alici_kullanici_adi = alici_kullanici_adi;
             satin_al.Show();
@@ -83,7 +81,7 @@ namespace Proje_Ödevi
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {
-                if (istek_fiyat >= Int32.Parse(oku["UrunFiyat"].ToString()))
+                if (istek_fiyat >= Convert.ToDouble(oku["UrunFiyat"].ToString().Replace(".",",")))
                 {
                     if (istek_miktar < Convert.ToDouble(oku["sUrunMiktar"].ToString().Replace(".",",")))
                     {
@@ -128,6 +126,7 @@ namespace Proje_Ödevi
 
         private void Beklemeye_al(string alici, double istek_fiyat, double istek_miktar, string ürün)
         {
+            //istek alis isteme Alis tablosuna kaydediliyor
             baglanti.Open();
             OleDbCommand komut = new OleDbCommand("insert into Alis(KullaniciAdi,UrunAdi,istekMiktar,istekFiyat) values('" + alici + "','" + ürün + "','" + istek_miktar.ToString() + "','" + istek_fiyat.ToString() + "')", baglanti);
             komut.ExecuteNonQuery();
@@ -141,6 +140,7 @@ namespace Proje_Ödevi
         }
         private void Para_gonder(string satici_Kullanici_adi, double gelen_para)
         {
+            //satis islemi gerceklestigi icin saticinin suanki parası bulunuyor.
             OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
@@ -153,6 +153,7 @@ namespace Proje_Ödevi
                 }
 
             }
+            //su an ki parası ile kazandıgı para toplanıp güncel parası güncelleniyor.
             gelen_para += total_para;
             OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + gelen_para.ToString() + "' where KullaniciAdi = '" + satici_Kullanici_adi + "'", baglanti);
             komut_2.ExecuteNonQuery();
@@ -162,7 +163,7 @@ namespace Proje_Ödevi
         }
         private void Para_cikar(string Kullanici_adi, double giden_para)
         {
-
+            //satis islemi gerceklestigi icin alicinin suan ki parası bulunuyor
             OleDbCommand komut = new OleDbCommand("select *from Kullanici", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
             while (oku.Read())
@@ -175,6 +176,7 @@ namespace Proje_Ödevi
                 }
 
             }
+            //suan ki parasindan harcadıgı para cıkarılıp parası güncelleniyor
             total_para -= giden_para;
             OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + total_para.ToString() + "' where KullaniciAdi = '" + Kullanici_adi + "'", baglanti);
             komut_2.ExecuteNonQuery();
@@ -186,12 +188,38 @@ namespace Proje_Ödevi
         private void urun_ekle(string Kullanici_adi, double alinan_miktar, string urunAd, string Birim)
         {
 
-            OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar.ToString() + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
-            komut.ExecuteNonQuery();
+            //Onceden bu urune sahip mi kontrol ediyoruz.
+            OleDbCommand sorgu = new OleDbCommand("select *from kUrun where KullaniciU='" + Kullanici_adi + "'", baglanti);
+            OleDbDataReader oku = sorgu.ExecuteReader();
+            while (oku.Read())
+            {
+                if (oku["UrunAdi"].ToString() == urunAd)
+                {
+                    olan_miktar = Convert.ToDouble(oku["UrunMiktar"].ToString().Replace(".", ","));
+                    total_miktar = olan_miktar + alinan_miktar;
+                    urunu_var = true;
+                    break;
+                }
+
+            }
+
+
+            //urunu var ise toplma urunu guncelliyoruz.
+            if (!urunu_var)
+            {
+                OleDbCommand komut = new OleDbCommand("insert into kUrun(UrunAdi,UrunMiktar,KullaniciU,UrunBirim) values('" + urunAd + "','" + alinan_miktar + "','" + Kullanici_adi + "','" + Birim + "')", baglanti);
+                komut.ExecuteNonQuery();
+            }
+            //urnu yok ise yeni kayıt ile ürünü kaydediyoruz
+            else
+            {
+                OleDbCommand komut = new OleDbCommand("update kUrun set UrunMiktar = '" + total_miktar.ToString() + "' where KullaniciU ='" + Kullanici_adi + "' AND UrunAdi = '" + urunAd + "'", baglanti);
+                komut.ExecuteNonQuery();
+            }
         }
         private void satistan_cikar(string Urunadi, string Kullanici_Adi, double alinan_miktar, int alinan_fiyat)
         {
-            
+            //gelen verilere göre kullanıcının satısta olan urununden satılan miktarı cıkarıyoruz
             OleDbCommand sorgu = new OleDbCommand("select *from Satis where UrunAdi= '" + Urunadi + "'", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
             while (oku.Read())
@@ -202,7 +230,9 @@ namespace Proje_Ödevi
                     break;
                 }
             }
+
             olan_miktar -= alinan_miktar;
+            //daha sonra kalan mıktarı guncelliyoruz
             OleDbCommand komut = new OleDbCommand("update Satis set sUrunMiktar='" + olan_miktar.ToString() + "' where KullaniciAdi='" + Kullanici_Adi + "' and UrunAdi='" + Urunadi + "' and UrunFiyat ='" + alinan_fiyat.ToString() + "'", baglanti);
             komut.ExecuteNonQuery();
 

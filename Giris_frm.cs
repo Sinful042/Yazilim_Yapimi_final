@@ -23,30 +23,37 @@ namespace Proje_Ödevi
         private static OleDbConnection connect = new OleDbConnection();
         public static OleDbConnection baglanti_kur()
         {
+            //baglantinin kurulup kurulmadıgını kontrol ediyorum.
             if (connect !=new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Veri_Tabani.mdb")) 
             {
+                //baglanti kurulmamıssa baglantıyı kuruyorum
                 connect = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Veri_Tabani.mdb");         
             }
+            //baglantı kurulduktan sonra gonderiyorum.
             return connect;
         }
-
+        //baglantiyi kuruyorum.
         OleDbConnection baglanti = baglanti_kur();
         private void kayit_btn_Click(object sender, EventArgs e)
         {
+            //kayit formunu acıp bu formu kapatıyorum
             kayit_frm kayit = new kayit_frm();
             kayit.Show();
             this.Hide();
         }
         private void gris_btn_Click(object sender, EventArgs e)
         {
-            
+            //baglantıyı açıyorum
             baglanti.Open();
+            //veri tabanından kullanici tablosunu okuyorumç
             OleDbCommand sorgu = new OleDbCommand("select *from Kullanici",baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
+            //tabloyu okudugu sürece kontrole devam ediyorum
             while (oku.Read())
             {
                 if(oku["KullaniciAdi"].ToString()== kullacini_txt.Text && oku["Parola"].ToString()== sifre_txt.Text && oku["Yetki"].ToString() =="Admin")
                 {
+                    //girilen bilgiler tablododan bir veriyle eşleşiyor ve yetkisi admin ise admin formunu açıyorum.
                     giris = true;
                     admin_frm admin_ana = new admin_frm();
                     admin_ana.Show();
@@ -55,6 +62,7 @@ namespace Proje_Ödevi
                 }
                 else if (oku["KullaniciAdi"].ToString() == kullacini_txt.Text && oku["Parola"].ToString() == sifre_txt.Text && oku["Yetki"].ToString() == "Kullanici")
                 {
+                    //girilen bilgiler tablodan bir veriyle eşleşiyor ve yetkisi kullanici ise kullanici ana sayfasını açıyorum.
                     giris = true;
                     ana_fr ana_Sayfa = new ana_fr();
                     ana_Sayfa.Kullanici_adi = oku["KullaniciAdi"].ToString();
@@ -64,6 +72,7 @@ namespace Proje_Ödevi
                     break;
                 }
             }
+            //veri girislerinin boş oluğ olmadıgını kontrol ediyoruz.
             if (kullacini_txt.Text == " " || sifre_txt.Text=="")
             {
                 MessageBox.Show("Kullani Adi veya şifre boş geçilemez", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -113,6 +122,11 @@ namespace Proje_Ödevi
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Giris_frm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

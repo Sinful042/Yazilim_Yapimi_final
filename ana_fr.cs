@@ -14,6 +14,7 @@ namespace Proje_Ödevi
     
     public partial class ana_fr : Form
     {
+        //Giris yapan kullanicinin bilgilerini tutuyorum.
         public string Kullanici_adi;
         public string Para;
         
@@ -21,20 +22,23 @@ namespace Proje_Ödevi
         {
             InitializeComponent();
         }
+        //baglantiyi kuruyorum
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
+        //kullanıcının ürünlerini listelemek için dataTable olusturuyorum
         DataTable tablo = new DataTable();
         private void ana_fr_Load(object sender, EventArgs e)
         {
+            //labela kullanıcının kullanıcı adını yazıyorum
             kullanici_lbl.Text = Kullanici_adi;
+            //diger labela kullanıcının parasını yazıyorum
             para_lbl.Text = Para;
-            baglanti.Open();
-            OleDbDataAdapter fiyat_liste = new OleDbDataAdapter("select  *from Satis ORDER BY UrunFiyat ASC", baglanti);
-            baglanti.Close();
+            //listeleme fonksiyonunu çagırıyoruz.
             listele();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //giris formunu açıp bu formu kapatıyoruz.
             Giris_frm giris = new Giris_frm();
             giris.Show();
             this.Hide();
@@ -42,7 +46,9 @@ namespace Proje_Ödevi
         }
         public void listele()
         {
+            //baglantiyi açıyorum
             baglanti.Open();
+            //kUrun tablosundan kullanıcı adına gore urun bigilerini çekiyorum
             OleDbDataAdapter liste = new OleDbDataAdapter("select UrunAdi,UrunMiktar,UrunBirim from kUrun where KullaniciU = '"+Kullanici_adi+"'", baglanti);
             liste.Fill(tablo);
             urunlistele.DataSource = tablo;
@@ -53,19 +59,22 @@ namespace Proje_Ödevi
         }
         private void para_ekle_btn_Click(object sender, EventArgs e)
         {
+            //para ekleme formunu acıyorum
             para_ekle_frm para_ekle = new para_ekle_frm();
-            para_ekle.kullanici_adi = Kullanici_adi;
+            para_ekle.Kullanici_adi = Kullanici_adi;
             para_ekle.ShowDialog();
            
             
         }
         private void cikisanasayfa_Click(object sender, EventArgs e)
         {
+            //programı kapatıyorum
             Application.Exit();
         }
 
         private void satis_btn_Click(object sender, EventArgs e)
         {
+            //satis formunu açıyorum ve gerekli bilgileri gönderiyorum
             satis_frm satis = new satis_frm();
             satis.Kullanici_adi = Kullanici_adi;
             satis.Urun_id = urunlistele.CurrentRow.Cells["UrunAdi"].Value.ToString();
@@ -77,6 +86,7 @@ namespace Proje_Ödevi
 
         private void ürün_al_btn_Click(object sender, EventArgs e)
         {
+            //satin alma formunu acıyorum ve gerekli bilgileri gönderdikden sonra bu formu kapatıyorum
             satin_al_frm ürün_al = new satin_al_frm();
             ürün_al.alici_kullanici_adi = Kullanici_adi;
             ürün_al.para = Para;
@@ -85,6 +95,7 @@ namespace Proje_Ödevi
         }
         private void avatar_Click(object sender, EventArgs e)
         {
+            //kullanıcı formunu acıp ve gerekli bilgileri gönderdikten sonra bu formu kapatıyorum.
             hesap hesap = new hesap();
             hesap.Kullanici_adi = Kullanici_adi;
             hesap.Para = Para;

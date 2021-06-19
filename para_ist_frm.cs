@@ -39,16 +39,18 @@ namespace Proje_Ödevi
 
         private void admin_frm_Load(object sender, EventArgs e)
         {
-            baglanti.Open();
-            OleDbDataAdapter fiyat_liste = new OleDbDataAdapter("select  *from Satis ORDER BY UrunFiyat ASC", baglanti);
-            baglanti.Close();
+            
+            //listeleme fonksiyonunu çagırıyoruz
             Listeleme();
 
         }
         public void Listeleme()
         {
+                //baglantiyi aciyoruz
                 baglanti.Open();
+                //Paraekle tablosunda ki bütün istekleri cekiyoruz
                 OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Paraekle", baglanti);
+                //olusturdugumuz listeyi dataTable'a yazdırıyoruz
                 liste.Fill(tablo);
                 paralisteleme.DataSource = tablo;
                 paralisteleme.ReadOnly = true;
@@ -60,8 +62,11 @@ namespace Proje_Ödevi
         }
         public void Filitre_Liste(string durum)
         {
+            //baglantyii aciyoruz
             baglanti.Open();
+            //Paraekle tablosunda ki istekleri gelen duruma göre listeliyoruz
             OleDbDataAdapter liste = new OleDbDataAdapter("select  *from Paraekle where Durum = '" + durum + "'", baglanti);
+            //olusturdugumuz listeyi dataTable'a yazdırıyoruz
             liste.Fill(tablo);
             paralisteleme.DataSource = tablo;
             baglanti.Close();
@@ -69,9 +74,12 @@ namespace Proje_Ödevi
 
         private void onay_btn_Click(object sender, EventArgs e)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //Paraekle tablosunu duruma göre okuyoruz
             OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + paralisteleme.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
+            //tabloyu okudugu sürece durumları kontrol ediyoruz
             while (oku.Read())
             {
                 if (oku["Durum"].ToString()=="Onaylandı")
@@ -88,22 +96,26 @@ namespace Proje_Ödevi
                 }
                 else
                 {
+                    //baglantiyi kapatıp parayı ekliyoruz
                     baglanti.Close();
                     Para_ekle();
                     break;
 
                 }
             }
-
+            //para eklemee islemi bitince tabloyu temizleyip tekrar listeliyoruz
             tablo.Clear();
             Listeleme();
 
         }
         private void onaylama_btn_Click(object sender, EventArgs e)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            ////Paraekle tablosunu duruma göre okuyoruz
             OleDbCommand komut = new OleDbCommand("select *from Paraekle where Durum= '" + paralisteleme.CurrentRow.Cells["Durum"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
+            //tabloyu okudugu sürece durumları kontrol ediyoruz
             while (oku.Read())
             {
                 if (oku["Durum"].ToString() == "Onaylandı")
@@ -122,8 +134,11 @@ namespace Proje_Ödevi
                 }
                 else
                 {
+                    //baglantyii kapatıyoruz
                     baglanti.Close();
+                    //durum degiskeninini degistiroyuz
                     durum = "Onaylanmadi";
+                    //gerekli degerleri alıp reddedilen istediğin durumunu güncelliyoruz
                     string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
                     string kullanici = paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString();
                     Durum_güncelle(durum,istek,kullanici);
@@ -132,6 +147,7 @@ namespace Proje_Ödevi
                     
                 }
             }
+            //Reddetme islemi bitince tabloyu temizleyip tekrar listeliyoruz
             tablo.Clear();
             Listeleme();
 
@@ -140,7 +156,9 @@ namespace Proje_Ödevi
 
         public void para_güncelle(double para)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //kullanıcının parasını güncelliyoruz
             OleDbCommand komut_2 = new OleDbCommand("update Kullanici set Cuzdan = '" + para.ToString() + "' where KullaniciAdi = '" + paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
             komut_2.ExecuteNonQuery();
             baglanti.Close();
@@ -148,7 +166,9 @@ namespace Proje_Ödevi
         }
         public void Durum_güncelle(string durum,string istek,string kullanici)
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //para isteginin durumunu güncelliyoruz
             OleDbCommand sorgu = new OleDbCommand("update Paraekle set Durum= '" + durum + "' where İstekPekle=  '" + istek + "' and KullaniciPekle = '"+kullanici+"'", baglanti);
             sorgu.ExecuteReader();
             baglanti.Close();
@@ -159,19 +179,25 @@ namespace Proje_Ödevi
         }
         public void Para_ekle()
         {
+            //baglantiyi aciyoruz
             baglanti.Open();
+            //şeçilen değerlere göre istek parayı buluyoruz
             OleDbCommand komut = new OleDbCommand("select *from Paraekle where İstekPekle= '" + paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku = komut.ExecuteReader();
 
             while (oku.Read())
             {
+                //istek parayı tablodan çekiyoruz
                 para = oku["İstekPekle"].ToString();
+                //istek parayı kur hesabına göre ayarlıyoruz
                 tl = kur_hesabı(Int32.Parse(para),oku["KullaniciPekle"].ToString());
+                //istek parayı kur hesabından gelen veriye eşitliyoruz
                 istek_para = tl;
             }
             baglanti.Close();
 
             baglanti.Open();
+            //Paraekle tablosunu şeçilen değerlere göre okuyup kullanıcnın şuan ki parasını buluyoruz
             OleDbCommand komut_2 = new OleDbCommand("Select *from Kullanici where KullaniciAdi= '" + paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString() + "'", baglanti);
             OleDbDataReader oku_2 = komut_2.ExecuteReader();
             while (oku_2.Read())
@@ -181,8 +207,10 @@ namespace Proje_Ödevi
                 total_para = istek_para + şuanki_para;
             }
             baglanti.Close();
+            //toplam parayı para güncelle fonksiyonuna gönderip parayı güncelliyoruz
             para_güncelle(total_para);
             durum = "Onaylandı";
+            //istek paranın durumunu güncelliyoruz
             string istek = paralisteleme.CurrentRow.Cells["İstekPekle"].Value.ToString();
             string kullanici = paralisteleme.CurrentRow.Cells["KullaniciPekle"].Value.ToString();
             Durum_güncelle(durum,istek,kullanici);
@@ -192,6 +220,7 @@ namespace Proje_Ödevi
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //filitre için kontrol yapıyoruz
             if (istekler.SelectedIndex==0)
             {
                 filitre = "Onaylandı";
@@ -214,26 +243,29 @@ namespace Proje_Ödevi
 
         private void cikisanasayfa_Click(object sender, EventArgs e)
         {
+            //uygulamadan cikis yapiyoruz
             Application.Exit();
         }
         private double kur_hesabı(int  istek_para,string kullanici)
         {
+            //Kur bilgisi için siteyi tanımlıyoruz
             string kurlar = "https://www.tcmb.gov.tr/kurlar/today.xml";
             var xml = new XmlDocument();
             xml.Load(kurlar);
+            //verilen değerlere göre istek paranın tipini buluyoruz
             OleDbCommand komut_2 = new OleDbCommand("Select *from Paraekle where KullaniciPekle= '" + kullanici + "' and İstekPekle= '"+istek_para.ToString()+"'", baglanti);
             OleDbDataReader oku_2 = komut_2.ExecuteReader();
             while (oku_2.Read())
-
-            {   //Tl'ye cevir
+            {   
                 if (oku_2["ParaTip"].ToString() == "TRY")
                 {
+                    //Tipi türk lirasi ise aynı değeri gönderiyoruz
                     tl = istek_para;
 
                 }
                 else if (oku_2["ParaTip"].ToString() == "EUR")
                 {
-                    //euroya cevir
+                    //Tipi euro ise kur bilgisini çekip parayı kurlar çarpıp gönderiyoruz
                     string euro_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='EUR']/BanknoteSelling").InnerXml;
                     double euro = Convert.ToDouble(euro_kur.Replace(".", ","));
                     tl = istek_para * euro;
@@ -245,7 +277,7 @@ namespace Proje_Ödevi
                 }
                 else if (oku_2["ParaTip"].ToString() == "USD")
                 {
-                    //dolara çevir
+                    //Tipi dolar ise kur bilgisini çekip parayı kurlar çarpıp gönderiyoruz
                     string usd_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='USD']/BanknoteSelling").InnerXml;
                     double usd = Convert.ToDouble(usd_kur.Replace(".", ","));
                     tl = istek_para * usd;
@@ -253,7 +285,7 @@ namespace Proje_Ödevi
                 }
                 else if (oku_2["ParaTip"].ToString() == "GBP")
                 {
-                    //gbpye çevir
+                    //Tipi gbp ise kur bilgisini çekip parayı kurlar çarpıp gönderiyoruz
                     string gbp_kur = xml.SelectSingleNode("Tarih_Date/Currency[@Kod ='GBP']/BanknoteSelling").InnerXml;
                     double gbp = Convert.ToDouble(gbp_kur.Replace(".", ","));
                     tl = istek_para * gbp;
@@ -261,7 +293,7 @@ namespace Proje_Ödevi
                 }
             }
 
-
+            //en son tlyi değer olarak gönderiyoruz
             return tl;
 
         }

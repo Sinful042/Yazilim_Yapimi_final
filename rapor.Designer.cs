@@ -29,14 +29,28 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rapor));
+            this.islem = new System.Windows.Forms.ComboBox();
             this.raporal = new System.Windows.Forms.Button();
-            this.raporturu = new System.Windows.Forms.ComboBox();
             this.urunler = new System.Windows.Forms.ComboBox();
             this.Btarih = new System.Windows.Forms.ComboBox();
             this.Starih = new System.Windows.Forms.ComboBox();
             this.gerirapor = new System.Windows.Forms.Button();
             this.cikisrapor = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // islem
+            // 
+            this.islem.ForeColor = System.Drawing.Color.Silver;
+            this.islem.FormattingEnabled = true;
+            this.islem.Items.AddRange(new object[] {
+            "Alış Raporu",
+            "Satış Raporu",
+            "Alış-Satış Raporu"});
+            this.islem.Location = new System.Drawing.Point(108, 222);
+            this.islem.Name = "islem";
+            this.islem.Size = new System.Drawing.Size(121, 21);
+            this.islem.TabIndex = 1;
+            this.islem.Text = "Rapor Tipi Seçiniz";
             // 
             // raporal
             // 
@@ -48,20 +62,6 @@
             this.raporal.Text = "rapor oluştur";
             this.raporal.UseVisualStyleBackColor = true;
             this.raporal.Click += new System.EventHandler(this.raporal_Click);
-            // 
-            // raporturu
-            // 
-            this.raporturu.ForeColor = System.Drawing.Color.Silver;
-            this.raporturu.FormattingEnabled = true;
-            this.raporturu.Items.AddRange(new object[] {
-            "Alış Raporu",
-            "Satış Raporu",
-            "Alış-Satış Raporu"});
-            this.raporturu.Location = new System.Drawing.Point(108, 222);
-            this.raporturu.Name = "raporturu";
-            this.raporturu.Size = new System.Drawing.Size(121, 21);
-            this.raporturu.TabIndex = 1;
-            this.raporturu.Text = "Rapor Tipi Seçiniz";
             // 
             // urunler
             // 
@@ -139,13 +139,14 @@
             this.Controls.Add(this.Starih);
             this.Controls.Add(this.Btarih);
             this.Controls.Add(this.urunler);
-            this.Controls.Add(this.raporturu);
+            this.Controls.Add(this.islem);
             this.Controls.Add(this.raporal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "rapor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "rapor";
+            this.Load += new System.EventHandler(this.rapor_Load);
             this.ResumeLayout(false);
 
         }
@@ -153,11 +154,11 @@
         #endregion
 
         private System.Windows.Forms.Button raporal;
-        private System.Windows.Forms.ComboBox raporturu;
         private System.Windows.Forms.ComboBox urunler;
         private System.Windows.Forms.ComboBox Btarih;
         private System.Windows.Forms.ComboBox Starih;
         private System.Windows.Forms.Button gerirapor;
         private System.Windows.Forms.Button cikisrapor;
+        private System.Windows.Forms.ComboBox islem;
     }
 }

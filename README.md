@@ -7,7 +7,7 @@
 Berk Tuna - 182805007 - II.Ogretim
 
 ## Uygulamanın Kullanımını Anlatan Video Linki;
-[C# ile yazılan Sinence Borsası Projemizin Final Hali](https://www.youtube.com/watch?v=OelW3Pob4Rc)
+[C# ile yazılan Sinence Borsası Projemizin Final Hali](https://youtu.be/-4vTdCO7WU8)
 # *Proje Açıklaması*
 Önceki versiyona baktığımızda bir çok hata ve eksiklikler olduğunu görüyoruz.Bu eksiklikleri düzeltmek adına 5 adet UserStory devreye giriyor bunlar;
 ## User Story 5

@@ -48,31 +48,16 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Fiyat Belirle
 ![fiyatbelirle](https://user-images.githubusercontent.com/70074665/122680162-919bd100-d1f6-11eb-89c7-629282ee5b2b.png)
 ## Para Ekle
-
+![paraekle](https://user-images.githubusercontent.com/70074665/122680342-4f26c400-d1f7-11eb-9621-fb9ef2ecf0b1.png)
 ## Hesap
-
+![hesap](https://user-images.githubusercontent.com/70074665/122680352-58179580-d1f7-11eb-93a8-de5a5cd70ff2.png)
 ## Rapor Al
-
+![rapor](https://user-images.githubusercontent.com/70074665/122680429-c0667700-d1f7-11eb-83f3-b92a3784a170.png)
+## Rapor Çıktı
+![raporcikti](https://user-images.githubusercontent.com/70074665/122680432-c5c3c180-d1f7-11eb-8bb6-b909ced8f0b1.png)
 ## Admin Paneli
-
+![admin](https://user-images.githubusercontent.com/70074665/122680361-5d74e000-d1f7-11eb-91b2-bf5bfa0fe76d.png)
 ## Para İstekleri
-
+![paraistekleri](https://user-images.githubusercontent.com/70074665/122680493-1c310000-d1f8-11eb-845c-cf0df63edfa4.png)
 ## Satış İstekleri
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![satisiskeleri](https://user-images.githubusercontent.com/70074665/122680497-1e935a00-d1f8-11eb-9bbd-b555956d9353.png)

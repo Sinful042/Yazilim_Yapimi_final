@@ -9,16 +9,21 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Uygulamanın Kullanımını Anlatan Video Linki;
 [C# ile yazılan Sinence Borsası Projemizin Final Hali](https://www.youtube.com/watch?v=OelW3Pob4Rc)
 # *Proje Açıklaması*
-
+Önceki versiyona baktığımızda bir çok hata ve eksiklikler olduğunu görüyoruz.Bu eksiklikleri düzeltmek adına 5 adet UserStory devreye giriyor bunlar;
 ## User Story 5
-
-
+Borsada olan Stop-Limit mantığını projemizde yapmaya çalıştık.İstediği fiyattan ürün olmazsa bekliyor,olduğu anda alım gerçekleşiyor.
+![fiyatbelirle](https://user-images.githubusercontent.com/70074665/122680162-919bd100-d1f6-11eb-89c7-629282ee5b2b.png)
 
 ## User Story 6
+Alım-Satım işlemini PDF formatında rapor olarak alabilme özelliğini ekledik.
+![raporcikti](https://user-images.githubusercontent.com/70074665/122680432-c5c3c180-d1f7-11eb-8bb6-b909ced8f0b1.png)
 
 ## User Story 7
-
+Farklı para tiplerini o anki kur değerine göre ekleme işlemini yaptık.Yazdığımız kodun genişleme özelliği sayesinde sonsuz kadar yeni para birimini ekleyebiliyoruz. 
+![paraekle](https://user-images.githubusercontent.com/70074665/122680342-4f26c400-d1f7-11eb-9621-fb9ef2ecf0b1.png)
 ## User Story 8
+Son olarak alım işlemlerinde %1 vergilendirme işlemini de yaptık ve veri tabanında olan Muhasebeye parayı yolluyor.
+![muhasebe](https://user-images.githubusercontent.com/70074665/122680823-f0af1500-d1f9-11eb-84d0-e96108e81be8.png)
 
 # Projemizin Scrum Table'ı
 ![Scrumtable](https://user-images.githubusercontent.com/70074665/122679460-a1fe7c80-d1f3-11eb-90ad-4be0a12c4339.png)

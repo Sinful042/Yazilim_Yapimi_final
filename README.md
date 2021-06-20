@@ -38,17 +38,15 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Giriş
 ![giris](https://user-images.githubusercontent.com/70074665/122679720-a11a1a80-d1f4-11eb-9875-9ae2f4053212.png)
 ## Kayıt Ol
-
+![kayit](https://user-images.githubusercontent.com/70074665/122680216-d6c00300-d1f6-11eb-9531-0d0c8544402f.png)
 ## Anasayfa
 ![anasayfa](https://user-images.githubusercontent.com/70074665/122679762-c73fba80-d1f4-11eb-9df0-e62b4e560b5e.png)
 ## Satış Yap
 ![satisyap](https://user-images.githubusercontent.com/70074665/122679831-1259cd80-d1f5-11eb-827c-371954c1bf97.png)
 ## Ürün Al-Piyadan Al
 ![alışyap](https://user-images.githubusercontent.com/70074665/122680002-e4c15400-d1f5-11eb-972d-6f66d818a52f.png)
-
 ## Fiyat Belirle
-![fiyatbelirle](https://user-images.githubusercontent.com/70074665/122680133-7761f300-d1f6-11eb-87de-444e99c4bc9d.png)
-
+![fiyatbelirle](https://user-images.githubusercontent.com/70074665/122680162-919bd100-d1f6-11eb-89c7-629282ee5b2b.png)
 ## Para Ekle
 
 ## Hesap
@@ -60,4 +58,21 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Para İstekleri
 
 ## Satış İstekleri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

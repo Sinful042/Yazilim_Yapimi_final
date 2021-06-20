@@ -52,7 +52,7 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Hesap
 ![hesap](https://user-images.githubusercontent.com/70074665/122680352-58179580-d1f7-11eb-93a8-de5a5cd70ff2.png)
 ## Rapor Al
-![rapor](https://user-images.githubusercontent.com/70074665/122680429-c0667700-d1f7-11eb-83f3-b92a3784a170.png)
+![rapor](https://user-images.githubusercontent.com/70074665/122680532-4682bd80-d1f8-11eb-8b36-851d535f39c3.png)
 ## Rapor Çıktı
 ![raporcikti](https://user-images.githubusercontent.com/70074665/122680432-c5c3c180-d1f7-11eb-8bb6-b909ced8f0b1.png)
 ## Admin Paneli

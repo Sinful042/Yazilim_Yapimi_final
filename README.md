@@ -12,6 +12,8 @@ Berk Tuna - 182805007 - II.Ogretim
 
 ## User Story 5
 
+
+
 ## User Story 6
 
 ## User Story 7
@@ -32,3 +34,28 @@ Berk Tuna - 182805007 - II.Ogretim
 
 
 ## Tüm Tasarım ve Kullanım
+##-------------------------
+## Giriş
+![giris](https://user-images.githubusercontent.com/70074665/122679720-a11a1a80-d1f4-11eb-9875-9ae2f4053212.png)
+## Anasayfa
+
+## Satış Yap
+
+## Ürün Al
+
+## Para Ekle
+
+## Hesap
+
+## Rapor Al
+
+## Piyadan Al
+
+## Fiyat Belirle
+
+## Admin Paneli
+
+## Para İstekleri
+
+## Satış İstekleri
+

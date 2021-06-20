@@ -236,7 +236,7 @@
             this.Name = "kayit_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kayıt Ol";
-            this.Load += new System.EventHandler(this.kayit_frm_Load);
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 

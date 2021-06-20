@@ -40,7 +40,7 @@ namespace Proje_Ödevi
                 }
                 else
                 {
-                    MessageBox.Show("Kaydınız başarıyla yapıldı.", "Tamam");
+                   
                     kayit_yapildi = true;
                 }
                 
@@ -66,6 +66,7 @@ namespace Proje_Ödevi
                     break;
                 }
             }
+            //Şifre ile Şifre tekrarın aynı olup olmadığını kontrol ediyoruz
             if (sifre.Text != sifretekrar.Text)
             {
 
@@ -99,7 +100,7 @@ namespace Proje_Ödevi
         {
             Application.Exit();
         }
-
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
         private void ad_Enter(object sender, EventArgs e)
         {
             if (ad.Text == "Ad")
@@ -256,10 +257,7 @@ namespace Proje_Ödevi
             this.Hide();
         }
 
-        private void kayit_frm_Load(object sender, EventArgs e)
-        {
-
-        }
+        
         char? passwordtekrarkayit = null;
         private void sifretekrar_Leave(object sender, EventArgs e)
         {
@@ -282,7 +280,8 @@ namespace Proje_Ödevi
             }
 
         }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
 
-        
+
     }
 }

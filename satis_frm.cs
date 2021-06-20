@@ -31,12 +31,21 @@ namespace Proje_Ödevi
         OleDbConnection baglanti = Giris_frm.baglanti_kur();
         private void onay_btn_Click(object sender, EventArgs e)
         {
+            //Textboxların boş olup olmadıklarını kontrol ediyoruz
+            if (birimdeger.Text== "Satmak istediğiniz miktarı giriniz" || birimfiyat.Text== "Satmak istediğiniz birim fiyatı giriniz")
+            {
+
+                MessageBox.Show("Boş geçilemez, lütfen tüm verileri giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            { 
             //istek miktarı ve birim fiyatı textboxlardan alıyoruz
+
             istek_miktar = Convert.ToDouble(birimdeger.Text.Replace(".", ","));
             birim_fiyat = Convert.ToDouble(birimfiyat.Text.Replace(".",","));
+           
             baglanti.Open();
-
-
+            
             //kUrun tablosu kullanici adina ve urun adina göre okuyoruz
             OleDbCommand sorgu = new OleDbCommand("select *from kUrun where KullaniciU= '" + Kullanici_adi + "'and UrunAdi='"+Urun_id+"'", baglanti);
             OleDbDataReader oku = sorgu.ExecuteReader();
@@ -46,10 +55,13 @@ namespace Proje_Ödevi
                 //satmak istediği miktarı olan miktarı ile karşılaştırıyoruz
                 if (istek_miktar>olan_miktar)
                 {
-                   MessageBox.Show("Bu miktarda ürününüz bulunmamaktadır", "Tamam");
+                    MessageBox.Show("Bu miktarda ürününüz bulunmamaktadır", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                    baglanti.Close();
                    break;
                 }
+
+                
+               
                else
                {
                    //satmak istediği miktarı çıkarıp satis listesine ekliyoruz
@@ -61,6 +73,8 @@ namespace Proje_Ödevi
                    break;
                }
             }
+            }
+
 
         }
         private void MiktarGüncelle(string KullaniciU,double miktar,string UrunAdi)
@@ -88,13 +102,15 @@ namespace Proje_Ödevi
         {
             //aan forumu acip bu forumu kapatiyoruz
             ana_fr anasayfa = new ana_fr();
+            
             anasayfa.Kullanici_adi = Kullanici_adi;
             anasayfa.Para = Para;
             anasayfa.Show();
             this.Hide();
+            anasayfa.Hide();
 
         }
-
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
         private void birimdeger_Enter(object sender, EventArgs e)
         {
             if (birimdeger.Text == "Satmak istediğiniz miktarı giriniz")
@@ -130,10 +146,7 @@ namespace Proje_Ödevi
                 birimfiyat.ForeColor = Color.Silver;
               }
         }
-
-        private void satis_frm_Load(object sender, EventArgs e)
-        {
-
-        }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
+        
     }
 }

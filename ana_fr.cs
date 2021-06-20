@@ -103,14 +103,6 @@ namespace Proje_Ödevi
             this.Hide();
         }
 
-        private void urunlistele_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void kullanici_lbl_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }

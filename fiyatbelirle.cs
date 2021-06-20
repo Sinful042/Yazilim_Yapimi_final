@@ -41,7 +41,8 @@ namespace Proje_Ödevi
             satin_al.alici_kullanici_adi = alici_kullanici_adi;
             satin_al.Show();
             this.Hide();
-            
+            satin_al.Hide();
+
         }
         private void fiyatbelirle_btn_Click(object sender, EventArgs e)
         {
@@ -60,12 +61,15 @@ namespace Proje_Ödevi
                 satin_al.alici_kullanici_adi = alici_kullanici_adi;
                 satin_al.Show();
                 this.Hide();
+                
             }
             //bakiyesi yeterli oldugu durumda satış kontrol işlemi başlıyor.
             else
             {
                 istek_fiyat = Convert.ToDouble(fiyatb_txt.Text.Replace(".",","));
                 satis_kntrl(istek_fiyat, alici_kullanici_adi, istek_ürün, istek_birim);
+                satin_al_frm satin_al = new satin_al_frm();
+                satin_al.Hide();
             }
 
         }
@@ -108,6 +112,7 @@ namespace Proje_Ödevi
                         satin_al.alici_kullanici_adi = alici_kullanici_adi;
                         satin_al.Show();
                         this.Hide();
+                        satin_al.Hide();
                     }
                 }
 
@@ -137,6 +142,7 @@ namespace Proje_Ödevi
             satin_al.alici_kullanici_adi = alici_kullanici_adi;
             satin_al.Show();
             this.Hide();
+            satin_al.Hide();
         }
         private void Para_gonder(string satici_Kullanici_adi, double gelen_para)
         {
@@ -238,9 +244,5 @@ namespace Proje_Ödevi
 
         }
 
-        private void fiyatbelirle_Load(object sender, EventArgs e)
-        {
-
-        }
     } 
 }

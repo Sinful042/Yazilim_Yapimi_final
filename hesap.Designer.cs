@@ -122,7 +122,7 @@
             this.kullanicibilgileri.RowHeadersVisible = false;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.kullanicibilgileri.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.kullanicibilgileri.Size = new System.Drawing.Size(522, 93);
+            this.kullanicibilgileri.Size = new System.Drawing.Size(522, 67);
             this.kullanicibilgileri.TabIndex = 12;
             // 
             // avatar

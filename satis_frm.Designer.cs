@@ -56,6 +56,7 @@
             this.birimdeger.Size = new System.Drawing.Size(175, 20);
             this.birimdeger.TabIndex = 1;
             this.birimdeger.Text = "Satmak istediğiniz miktarı giriniz";
+            
             this.birimdeger.Enter += new System.EventHandler(this.birimdeger_Enter);
             this.birimdeger.Leave += new System.EventHandler(this.birimdeger_Leave);
             // 
@@ -128,7 +129,7 @@
             this.Name = "satis_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Şatış Yap";
-            this.Load += new System.EventHandler(this.satis_frm_Load);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 

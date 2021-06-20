@@ -32,10 +32,13 @@ namespace Proje_Ödevi
         {
             //hesap formunu açıp bu formu kapatıyoruz
             hesap hesap = new hesap();
-            hesap.Show();
+            
             hesap.Kullanici_adi = Kullanici_adi;
             hesap.Para = Para;
+            hesap.Show();
             this.Hide();
+
+           
         }
 
         private void cikisrapor_Click(object sender, EventArgs e)
@@ -46,8 +49,14 @@ namespace Proje_Ödevi
 
         private void raporal_Click(object sender, EventArgs e)
         {
+            if (urunler.Text == "Ürün Seçiniz" || Btarih.Text == "Başlangıç Tarih Seçiniz" || Starih.Text == "Bitiş Tarih Seçiniz" || islem.Text == "Rapor Tipi Seçiniz")
+            {
+                MessageBox.Show("Lütfen tüm verileri seçiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else 
+            { 
             //Raporun tipini comboboxdan alıyoruz
-            if(islem.SelectedIndex == 0)
+            if (islem.SelectedIndex == 0)
             {
                 islem_turu = "Alis";
             }
@@ -62,6 +71,7 @@ namespace Proje_Ödevi
             }
             //rapor cikar fonksiyonuna gerekli değerleri gönderiyoruz
             rapor_cikar(Kullanici_adi,urunler.SelectedItem.ToString(),Btarih.SelectedItem.ToString(),Starih.SelectedItem.ToString(),islem_turu);
+            }
         }
 
         private void rapor_Load(object sender, EventArgs e)
@@ -76,7 +86,7 @@ namespace Proje_Ödevi
             //pdf için yeni document olusturuyoruz
             iTextSharp.text.Document  rapor = new iTextSharp.text.Document();
             //pdfin nereye oluşturulucagını bellirliyoruz
-            PdfWriter.GetInstance(rapor, new FileStream("C:Rapor.Pdf", FileMode.Create));
+            PdfWriter.GetInstance(rapor, new FileStream("C:"+kullanici+"_Rapor.Pdf", FileMode.Create));
             //pdf açık olup olamdıgını kontrol ediyoruz
             if (rapor.IsOpen() == false)
             {
@@ -96,19 +106,23 @@ namespace Proje_Ödevi
                 OleDbDataReader oku = komut.ExecuteReader();
                 while (oku.Read())
                 {
+                    
                     //girilen tarihler ile verideki tarihleri kıyaslıyoruz
                     durum = DateTime.Compare(Convert.ToDateTime(oku["islemTarih"].ToString()), ilk);
                     durum_2 = DateTime.Compare(Convert.ToDateTime(oku["islemTarih"].ToString()), son);
                     //eger ilk tarih girilen tarihden büyükse ve son tarih girilen tarihden küçükse bu islem istenilen tarihler arasındadır
+                   
                     if (durum >= 0 && durum_2 <= 0)
                     {
-                       // İslemler tablosunda ki bilgeri pdfe yazdırıyoruz
+                        // İslemler tablosunda ki bilgeri pdfe yazdırıyoruz
+                        rapor.Add(new Paragraph("Adı :" + oku["KullaniciAdi"].ToString() + ""));
+                        rapor.Add(new Paragraph("Islem Türü:" + oku["İslemTuru"].ToString() + ""));
                         rapor.Add(new Paragraph("Tarih : " + oku["islemTarih"].ToString() + ""));
                         rapor.Add(new Paragraph("Ürün Tipi : " + oku["urunAdi"].ToString() + " "));
                         rapor.Add(new Paragraph("Tutar : " + oku["UrunFiyat"].ToString() + " TL"));
                         rapor.Add(new Paragraph("Miktar : " + oku["UrunMiktar"].ToString() + " Kg "));
-                        rapor.Add(new Paragraph(""));
-
+                        rapor.Add(new Paragraph("-------------"));
+                        
                     }
 
 
@@ -129,21 +143,21 @@ namespace Proje_Ödevi
                     durum_2 = DateTime.Compare(Convert.ToDateTime(oku["islemTarih"].ToString()), son);
                     if (durum >= 0 && durum_2 <= 0)
                     {
+                        rapor.Add(new Paragraph("Adı :" + oku["KullaniciAdi"].ToString() + ""));
                         rapor.Add(new Paragraph("Islem Türü : " + oku["İslemTuru"].ToString() + ""));
                         rapor.Add(new Paragraph("Tarih : " + oku["islemTarih"].ToString() + ""));
                         rapor.Add(new Paragraph("Ürün Tipi : " + oku["urunAdi"].ToString() + " "));
                         rapor.Add(new Paragraph("Tutar : " + oku["UrunFiyat"].ToString() + " TL"));
                         rapor.Add(new Paragraph("Miktar : " + oku["UrunMiktar"].ToString() + " kg "));
-                        rapor.Add(new Paragraph(""));
-
+                        
+                        rapor.Add(new Paragraph("-------------"));
                     }
-
-
                 }
                 baglanti.Close();
                 rapor.Close();
                 MessageBox.Show("Rapor olusturuldu", "Tamam");
             }
+
             
 
         }
@@ -160,6 +174,81 @@ namespace Proje_Ödevi
             }
             baglanti.Close();
         }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
+        private void urunler_Enter(object sender, EventArgs e)
+        {
+            if (urunler.Text == "Ürün Seçiniz")
+            {
+                urunler.Text = "";
+                urunler.ForeColor = Color.Black;
+            }
+        }
+
+        private void urunler_Leave(object sender, EventArgs e)
+        {
+            if (urunler.Text == "")
+            {
+                urunler.Text = "Ürün Seçiniz";
+                urunler.ForeColor = Color.Silver;
+            }
+        }
+
+        private void Btarih_Enter(object sender, EventArgs e)
+        {
+            if (Btarih.Text == "Başlangıç Tarih Seçiniz")
+            {
+                Btarih.Text = "";
+                Btarih.ForeColor = Color.Black;
+            }
+        }
+
+        private void Btarih_Leave(object sender, EventArgs e)
+        {
+            if (Btarih.Text == "")
+            {
+                Btarih.Text = "Başlangıç Tarih Seçiniz";
+                Btarih.ForeColor = Color.Silver;
+            }
+        }
+
+        private void Starih_Enter(object sender, EventArgs e)
+        {
+            if (Starih.Text == "Bitiş Tarih Seçiniz")
+            {
+                Starih.Text = "";
+                Starih.ForeColor = Color.Black;
+            }
+        }
+
+        private void Starih_Leave(object sender, EventArgs e)
+        {
+            if (Starih.Text == "")
+            {
+                Starih.Text = "Bitiş Tarih Seçiniz";
+                Starih.ForeColor = Color.Silver;
+            }
+        }
+
+        private void islem_Enter(object sender, EventArgs e)
+        {
+            if (islem.Text == "Rapor Tipi Seçiniz")
+            {
+                islem.Text = "";
+                islem.ForeColor = Color.Black;
+            }
+
+        }
+
+        private void islem_Leave(object sender, EventArgs e)
+        {
+            if (islem.Text == "")
+            {
+                islem.Text = "Rapor Tipi Seçiniz";
+                islem.ForeColor = Color.Silver;
+            }
+        }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
+       
         private void tarih_ekle()
         {
             //Rapor  icin comboboxa veri tabanından itemler çekiliyor.

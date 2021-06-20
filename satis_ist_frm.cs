@@ -46,7 +46,8 @@ namespace Proje_Ödevi
         DataTable tablo = new DataTable();
         private void satis_ist_frm_Load(object sender, EventArgs e)
         {
-            
+            //listeleme fonksiyonunu çagırıyoruz
+
             listele();
         }
         private void listele()
@@ -157,13 +158,13 @@ namespace Proje_Ödevi
             {
                 if (oku["SatisOnay"].ToString() == "Onaylandi")
                 {
-                    MessageBox.Show("Şatış isteği daha önce onaylamış", "Tamam");
+                    MessageBox.Show("Şatış isteği daha önce onaylamış", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }
                 else if (oku["SatisOnay"].ToString() == "Onaylanmadi")
                 {
-                    MessageBox.Show("Şatış isteği daha önce reddedilmiş", "Tamam");
+                    MessageBox.Show("Şatış isteği daha önce reddedilmiş", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                 }

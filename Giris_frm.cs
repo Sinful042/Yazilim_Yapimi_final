@@ -73,7 +73,7 @@ namespace Proje_Ödevi
                 }
             }
             //veri girislerinin boş oluğ olmadıgını kontrol ediyoruz.
-            if (kullacini_txt.Text == " " || sifre_txt.Text=="")
+            if (kullacini_txt.Text == "Kullanıcı-Adı" || sifre_txt.Text== "Parola")
             {
                 MessageBox.Show("Kullani Adi veya şifre boş geçilemez", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -83,6 +83,7 @@ namespace Proje_Ödevi
             }
             baglanti.Close();
         }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
         private void kullacini_txt_Enter(object sender, EventArgs e)
         {
             if(kullacini_txt.Text=="Kullanıcı-Adı")
@@ -119,14 +120,12 @@ namespace Proje_Ödevi
                 sifre_txt.ForeColor = Color.Silver;
             }
         }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void Giris_frm_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

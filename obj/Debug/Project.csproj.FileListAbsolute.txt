@@ -77,3 +77,4 @@ C:\Users\omerk\Desktop\Yazilim_Yapimi_Final\Yazilim_Yapimi_final\obj\Debug\Proje
 C:\Users\omerk\Desktop\Yazilim_Yapimi_Final\Yazilim_Yapimi_final\obj\Debug\Proje Ödevi.pdb
 C:\Users\omerk\Desktop\Yazilim_Yapimi_Final\Yazilim_Yapimi_final\bin\Debug\itextsharp.dll
 C:\Users\omerk\Desktop\Yazilim_Yapimi_Final\Yazilim_Yapimi_final\obj\Debug\Project.csproj.CopyComplete
+C:\Users\Berk\Desktop\tasarım\Yazilim_Yapimi_final\obj\Debug\Project.csproj.CopyComplete

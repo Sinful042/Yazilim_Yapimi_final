@@ -29,11 +29,11 @@ namespace Proje_Ödevi
             //textboxlarının boş olup olmadıgını kontrol ediyoruz
             if (istek_para.Text== "Lütfen Miktarı giriniz")
             {
-                MessageBox.Show("Lütfen miktar Giriniz.", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lütfen miktar Giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (paratip.SelectedItem==null)
             {
-                MessageBox.Show("Lütfen para tipini şeçiniz", "hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lütfen para tipini şeçiniz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -68,9 +68,10 @@ namespace Proje_Ödevi
             anasayfa.Para = Para;
             anasayfa.Show();
             this.Hide();
+            anasayfa.Hide();
 
         }
-
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
         private void istek_para_Enter(object sender, EventArgs e)
         {
             if (istek_para.Text == "Lütfen Miktarı giriniz")
@@ -106,10 +107,7 @@ namespace Proje_Ödevi
                 paratip.ForeColor = Color.Silver;
             }
         }
-
-        private void para_ekle_frm_Load(object sender, EventArgs e)
-        {
-
-        }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
+        
     }
 }

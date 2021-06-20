@@ -51,6 +51,8 @@
             this.islem.Size = new System.Drawing.Size(121, 21);
             this.islem.TabIndex = 1;
             this.islem.Text = "Rapor Tipi Seçiniz";
+            this.islem.Enter += new System.EventHandler(this.islem_Enter);
+            this.islem.Leave += new System.EventHandler(this.islem_Leave);
             // 
             // raporal
             // 
@@ -67,37 +69,39 @@
             // 
             this.urunler.ForeColor = System.Drawing.Color.Silver;
             this.urunler.FormattingEnabled = true;
-            this.urunler.Items.AddRange(new object[] {
-            "kullanıcı adına göre ürünleri comboboxlara at"});
             this.urunler.Location = new System.Drawing.Point(108, 98);
             this.urunler.Name = "urunler";
             this.urunler.Size = new System.Drawing.Size(121, 21);
             this.urunler.TabIndex = 3;
             this.urunler.Text = "Ürün Seçiniz";
+            
+            this.urunler.Enter += new System.EventHandler(this.urunler_Enter);
+            this.urunler.Leave += new System.EventHandler(this.urunler_Leave);
             // 
             // Btarih
             // 
             this.Btarih.ForeColor = System.Drawing.Color.Silver;
             this.Btarih.FormattingEnabled = true;
-            this.Btarih.Items.AddRange(new object[] {
-            "Yukarda seçilen ürüne göre"});
             this.Btarih.Location = new System.Drawing.Point(108, 151);
             this.Btarih.Name = "Btarih";
             this.Btarih.Size = new System.Drawing.Size(135, 21);
             this.Btarih.TabIndex = 4;
             this.Btarih.Text = "Başlangıç Tarih Seçiniz";
+            this.Btarih.Enter += new System.EventHandler(this.Btarih_Enter);
+            this.Btarih.Leave += new System.EventHandler(this.Btarih_Leave);
             // 
             // Starih
             // 
             this.Starih.ForeColor = System.Drawing.Color.Silver;
             this.Starih.FormattingEnabled = true;
-            this.Starih.Items.AddRange(new object[] {
-            "Yukarda seçilen ürüne göre"});
             this.Starih.Location = new System.Drawing.Point(249, 151);
             this.Starih.Name = "Starih";
             this.Starih.Size = new System.Drawing.Size(109, 21);
             this.Starih.TabIndex = 5;
             this.Starih.Text = "Bitiş Tarih Seçiniz";
+           
+            this.Starih.Enter += new System.EventHandler(this.Starih_Enter);
+            this.Starih.Leave += new System.EventHandler(this.Starih_Leave);
             // 
             // gerirapor
             // 

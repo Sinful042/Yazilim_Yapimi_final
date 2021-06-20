@@ -120,14 +120,14 @@ namespace Proje_Ödevi
             {
                 if (oku["Durum"].ToString() == "Onaylandı")
                 {
-                    MessageBox.Show("Para isteği daha önce onaylamış", "Tamam");
+                    MessageBox.Show("Para isteği daha önce onaylamış", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                     
                 }
                 else if (oku["Durum"].ToString() == "Onaylanmadi")
                 {
-                    MessageBox.Show("Para isteği daha önce reddedilmiş", "Tamam");
+                    MessageBox.Show("Para isteği daha önce reddedilmiş", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     baglanti.Close();
                     break;
                     
@@ -298,14 +298,5 @@ namespace Proje_Ödevi
 
         }
 
-        private void istekler_Leave(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void istekler_Enter(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

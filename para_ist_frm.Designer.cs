@@ -82,8 +82,7 @@
             this.istekler.Size = new System.Drawing.Size(142, 21);
             this.istekler.TabIndex = 4;
             this.istekler.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.istekler.Enter += new System.EventHandler(this.istekler_Enter);
-            this.istekler.Leave += new System.EventHandler(this.istekler_Leave);
+            
             // 
             // onaylama_btn
             // 

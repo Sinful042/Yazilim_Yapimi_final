@@ -170,7 +170,7 @@ namespace Proje_Ödevi
             
 
         }
-
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar başlangıç
         private void birim_Enter(object sender, EventArgs e)
         {
             if (birim.Text == "Lütfen birim giriniz")
@@ -190,9 +190,9 @@ namespace Proje_Ödevi
                 birim.ForeColor = Color.Silver;
             }
         }
+        //tasarım için fare tıklaması öncesi ve sonrası için kodlar bitiş
 
-        
-        
+
 
         private void satın_al_btn_Click(object sender, EventArgs e)
         {

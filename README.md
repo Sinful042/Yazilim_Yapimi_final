@@ -19,6 +19,8 @@ Borsada olan Stop-Limit mantığını projemizde yapmaya çalıştık.İstediği
 
 ## User Story 6
 Alım-Satım işlemini PDF formatında rapor olarak alabilme özelliğini ekledik.
+
+
 ![raporcikti](https://user-images.githubusercontent.com/70074665/122680432-c5c3c180-d1f7-11eb-8bb6-b909ced8f0b1.png)
 
 ## User Story 7
@@ -37,6 +39,8 @@ Son olarak alım işlemlerinde %1 vergilendirme işlemini de yaptık ve veri tab
 ![veritabanisatis](https://user-images.githubusercontent.com/70074665/122679481-bb9fc400-d1f3-11eb-90a4-7b23b9150278.png)
 ![veritabaniislemler](https://user-images.githubusercontent.com/70074665/122679492-c4909580-d1f3-11eb-9ccf-fe7f882b9cc9.png)
 ![veritabanikUrun](https://user-images.githubusercontent.com/70074665/122679499-c8bcb300-d1f3-11eb-9c18-7fb455551ee4.png)
+
+
 ![veritabaniurunler](https://user-images.githubusercontent.com/70074665/122679501-ca867680-d1f3-11eb-85d4-7a44246ed088.png)
 
 

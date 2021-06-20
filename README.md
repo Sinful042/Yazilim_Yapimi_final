@@ -1,5 +1,5 @@
-# Yazilim_Yapimi
-# *SINENCE Borsası Projemiz*
+# Yazilim_Yapimi_Final
+# *SINENCE Borsası Final Projemiz*
 
 ## Projeyi Yapanlar
 Ömer Killik - 192802045 - I.Ogretim

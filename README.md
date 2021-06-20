@@ -20,8 +20,6 @@ Berk Tuna - 182805007 - II.Ogretim
 
 # Projemizin Scrum Table'ı
 
-![Ekran görüntüsü 2021-05-17 041205](https://user-images.githubusercontent.com/84200869/118420032-69382880-b6c6-11eb-9bbd-abcf93b4161a.png)
-
 ## Veri Tabanı
 
 ## Tüm Tasarım ve Kullanım

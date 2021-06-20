@@ -40,18 +40,16 @@ Berk Tuna - 182805007 - II.Ogretim
 ## Anasayfa
 ![anasayfa](https://user-images.githubusercontent.com/70074665/122679762-c73fba80-d1f4-11eb-9df0-e62b4e560b5e.png)
 ## Satış Yap
+![satisyap](https://user-images.githubusercontent.com/70074665/122679831-1259cd80-d1f5-11eb-827c-371954c1bf97.png)
+## Ürün Al-Piyadan Al
+![alışyap](https://user-images.githubusercontent.com/70074665/122680002-e4c15400-d1f5-11eb-972d-6f66d818a52f.png)
 
-## Ürün Al
-
+## Fiyat Belirle
 ## Para Ekle
 
 ## Hesap
 
 ## Rapor Al
-
-## Piyadan Al
-
-## Fiyat Belirle
 
 ## Admin Paneli
 

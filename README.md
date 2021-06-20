@@ -34,11 +34,11 @@ Berk Tuna - 182805007 - II.Ogretim
 
 
 ## Tüm Tasarım ve Kullanım
-##-------------------------
+
 ## Giriş
 ![giris](https://user-images.githubusercontent.com/70074665/122679720-a11a1a80-d1f4-11eb-9875-9ae2f4053212.png)
 ## Anasayfa
-
+![anasayfa](https://user-images.githubusercontent.com/70074665/122679762-c73fba80-d1f4-11eb-9df0-e62b4e560b5e.png)
 ## Satış Yap
 
 ## Ürün Al

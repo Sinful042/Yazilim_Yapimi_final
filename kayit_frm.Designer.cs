@@ -40,7 +40,7 @@
             this.adres = new System.Windows.Forms.TextBox();
             this.cikiskayit = new System.Windows.Forms.Button();
             this.gerikayit = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.uyeol_lbl = new System.Windows.Forms.Label();
             this.sifretekrar = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -186,17 +186,17 @@
             this.gerikayit.UseVisualStyleBackColor = false;
             this.gerikayit.Click += new System.EventHandler(this.gerikayit_Click);
             // 
-            // label2
+            // uyeol_lbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Stencil", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Cornsilk;
-            this.label2.Location = new System.Drawing.Point(217, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 47);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Üye Ol";
+            this.uyeol_lbl.AutoSize = true;
+            this.uyeol_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.uyeol_lbl.Font = new System.Drawing.Font("Stencil", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uyeol_lbl.ForeColor = System.Drawing.Color.Cornsilk;
+            this.uyeol_lbl.Location = new System.Drawing.Point(217, 24);
+            this.uyeol_lbl.Name = "uyeol_lbl";
+            this.uyeol_lbl.Size = new System.Drawing.Size(156, 47);
+            this.uyeol_lbl.TabIndex = 20;
+            this.uyeol_lbl.Text = "Üye Ol";
             // 
             // sifretekrar
             // 
@@ -218,7 +218,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(575, 575);
             this.Controls.Add(this.sifretekrar);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.uyeol_lbl);
             this.Controls.Add(this.gerikayit);
             this.Controls.Add(this.cikiskayit);
             this.Controls.Add(this.adres);
@@ -236,7 +236,6 @@
             this.Name = "kayit_frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kayıt Ol";
-           
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,7 +253,7 @@
         private System.Windows.Forms.TextBox adres;
         private System.Windows.Forms.Button cikiskayit;
         private System.Windows.Forms.Button gerikayit;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label uyeol_lbl;
         private System.Windows.Forms.TextBox sifretekrar;
     }
 }
